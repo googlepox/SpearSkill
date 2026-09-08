@@ -6,10 +6,12 @@
 #include "obse/GameObjects.h"
 #include "obse/GameProcess.h"
 #include "obse/GameTiles.h"
+#include "obse/CommandTable.h"
+#include "obse/ParamInfos.h"
 #include "obse_common/SafeWrite.h"
 #include "SpearNpcSkillSidecar.h"
 #include "SpearWeaponTypeSidecar.h"
-#include "..\shared\SidecarSkillProvider.h"
+#include "TrueCustomSkills/TrueCustomSkillsInterface.h"
 
 #include <cmath>
 #include <cstdio>
@@ -28,6 +30,9 @@ OBSESerializationInterface* g_serialization = nullptr;
 
 namespace SpearSkill
 {
+	static OBSEMessagingInterface* g_messaging = nullptr;
+	static TrueCustomSkillsInterface* g_tcs = nullptr;
+
 	static constexpr UInt32 kPluginVersion = 1;
 	static constexpr UInt32 kSaveVersion = 1;
 	static constexpr UInt32 kRecordState = ('S') | ('P' << 8) | ('E' << 16) | ('A' << 24);
@@ -473,113 +478,6 @@ namespace SpearSkill
 		{ SpearSkillShared::kSpearSkillId, "Spear", kSpearSkillDisplayName, TESClass::eSpec_Combat, kActorVal_Endurance, kActorVal_Blade, kSpearSkillIconPath, kSpearSkillRowIconPath, kVanillaBladeSkillIconPath, kVanillaBladeSkillSmallIconPath, kSpearSkillDescription, kSpearClassPickerDescription },
 	};
 
-#define SPEAR_LEVEL_PROGRESS(level) { level, static_cast<float>(level), static_cast<float>(level), kSkillProgressionPlaceholderDescription }
-	static const SkillLevelProgression kDefaultSkillLevelProgression[kSkillProgressionLevelCount] =
-	{
-		{ 0, 0.0f, 1.0f, kSkillProgressionPlaceholderDescription },
-		SPEAR_LEVEL_PROGRESS(1),
-		SPEAR_LEVEL_PROGRESS(2),
-		SPEAR_LEVEL_PROGRESS(3),
-		SPEAR_LEVEL_PROGRESS(4),
-		SPEAR_LEVEL_PROGRESS(5),
-		SPEAR_LEVEL_PROGRESS(6),
-		SPEAR_LEVEL_PROGRESS(7),
-		SPEAR_LEVEL_PROGRESS(8),
-		SPEAR_LEVEL_PROGRESS(9),
-		SPEAR_LEVEL_PROGRESS(10),
-		SPEAR_LEVEL_PROGRESS(11),
-		SPEAR_LEVEL_PROGRESS(12),
-		SPEAR_LEVEL_PROGRESS(13),
-		SPEAR_LEVEL_PROGRESS(14),
-		SPEAR_LEVEL_PROGRESS(15),
-		SPEAR_LEVEL_PROGRESS(16),
-		SPEAR_LEVEL_PROGRESS(17),
-		SPEAR_LEVEL_PROGRESS(18),
-		SPEAR_LEVEL_PROGRESS(19),
-		SPEAR_LEVEL_PROGRESS(20),
-		SPEAR_LEVEL_PROGRESS(21),
-		SPEAR_LEVEL_PROGRESS(22),
-		SPEAR_LEVEL_PROGRESS(23),
-		SPEAR_LEVEL_PROGRESS(24),
-		SPEAR_LEVEL_PROGRESS(25),
-		SPEAR_LEVEL_PROGRESS(26),
-		SPEAR_LEVEL_PROGRESS(27),
-		SPEAR_LEVEL_PROGRESS(28),
-		SPEAR_LEVEL_PROGRESS(29),
-		SPEAR_LEVEL_PROGRESS(30),
-		SPEAR_LEVEL_PROGRESS(31),
-		SPEAR_LEVEL_PROGRESS(32),
-		SPEAR_LEVEL_PROGRESS(33),
-		SPEAR_LEVEL_PROGRESS(34),
-		SPEAR_LEVEL_PROGRESS(35),
-		SPEAR_LEVEL_PROGRESS(36),
-		SPEAR_LEVEL_PROGRESS(37),
-		SPEAR_LEVEL_PROGRESS(38),
-		SPEAR_LEVEL_PROGRESS(39),
-		SPEAR_LEVEL_PROGRESS(40),
-		SPEAR_LEVEL_PROGRESS(41),
-		SPEAR_LEVEL_PROGRESS(42),
-		SPEAR_LEVEL_PROGRESS(43),
-		SPEAR_LEVEL_PROGRESS(44),
-		SPEAR_LEVEL_PROGRESS(45),
-		SPEAR_LEVEL_PROGRESS(46),
-		SPEAR_LEVEL_PROGRESS(47),
-		SPEAR_LEVEL_PROGRESS(48),
-		SPEAR_LEVEL_PROGRESS(49),
-		SPEAR_LEVEL_PROGRESS(50),
-		SPEAR_LEVEL_PROGRESS(51),
-		SPEAR_LEVEL_PROGRESS(52),
-		SPEAR_LEVEL_PROGRESS(53),
-		SPEAR_LEVEL_PROGRESS(54),
-		SPEAR_LEVEL_PROGRESS(55),
-		SPEAR_LEVEL_PROGRESS(56),
-		SPEAR_LEVEL_PROGRESS(57),
-		SPEAR_LEVEL_PROGRESS(58),
-		SPEAR_LEVEL_PROGRESS(59),
-		SPEAR_LEVEL_PROGRESS(60),
-		SPEAR_LEVEL_PROGRESS(61),
-		SPEAR_LEVEL_PROGRESS(62),
-		SPEAR_LEVEL_PROGRESS(63),
-		SPEAR_LEVEL_PROGRESS(64),
-		SPEAR_LEVEL_PROGRESS(65),
-		SPEAR_LEVEL_PROGRESS(66),
-		SPEAR_LEVEL_PROGRESS(67),
-		SPEAR_LEVEL_PROGRESS(68),
-		SPEAR_LEVEL_PROGRESS(69),
-		SPEAR_LEVEL_PROGRESS(70),
-		SPEAR_LEVEL_PROGRESS(71),
-		SPEAR_LEVEL_PROGRESS(72),
-		SPEAR_LEVEL_PROGRESS(73),
-		SPEAR_LEVEL_PROGRESS(74),
-		SPEAR_LEVEL_PROGRESS(75),
-		SPEAR_LEVEL_PROGRESS(76),
-		SPEAR_LEVEL_PROGRESS(77),
-		SPEAR_LEVEL_PROGRESS(78),
-		SPEAR_LEVEL_PROGRESS(79),
-		SPEAR_LEVEL_PROGRESS(80),
-		SPEAR_LEVEL_PROGRESS(81),
-		SPEAR_LEVEL_PROGRESS(82),
-		SPEAR_LEVEL_PROGRESS(83),
-		SPEAR_LEVEL_PROGRESS(84),
-		SPEAR_LEVEL_PROGRESS(85),
-		SPEAR_LEVEL_PROGRESS(86),
-		SPEAR_LEVEL_PROGRESS(87),
-		SPEAR_LEVEL_PROGRESS(88),
-		SPEAR_LEVEL_PROGRESS(89),
-		SPEAR_LEVEL_PROGRESS(90),
-		SPEAR_LEVEL_PROGRESS(91),
-		SPEAR_LEVEL_PROGRESS(92),
-		SPEAR_LEVEL_PROGRESS(93),
-		SPEAR_LEVEL_PROGRESS(94),
-		SPEAR_LEVEL_PROGRESS(95),
-		SPEAR_LEVEL_PROGRESS(96),
-		SPEAR_LEVEL_PROGRESS(97),
-		SPEAR_LEVEL_PROGRESS(98),
-		SPEAR_LEVEL_PROGRESS(99),
-		SPEAR_LEVEL_PROGRESS(100),
-	};
-#undef SPEAR_LEVEL_PROGRESS
-
 	static const SkillProgressionDefinition kSkillProgressions[kSkillCount] =
 	{
 		{ SpearSkillShared::kSpearSkillId, kDefaultSkillLevelProgression, kSkillProgressionLevelCount },
@@ -661,23 +559,23 @@ namespace SpearSkill
 	using TESActorBaseGetEquippableItemRatingFn = double(__thiscall*)(TESForm* actorBase, TESForm* item);
 	using StatsMenuCreateRowsFn = void(__thiscall*)(void* statsMenu);
 	using StatsMenuRefreshFn = void(__thiscall*)(void* statsMenu, UInt32 actorValue);
-	using MenuCreateTileFromTemplateFn = Tile*(__thiscall*)(void* menu, Tile* parent, const char* templateName, UInt32 unk);
+	using MenuCreateTileFromTemplateFn = Tile * (__thiscall*)(void* menu, Tile* parent, const char* templateName, UInt32 unk);
 	using TileSetFloatFn = void(__thiscall*)(Tile* tile, UInt32 trait, float value);
 	using TileSetStringFn = void(__thiscall*)(Tile* tile, UInt32 trait, const char* value);
 	using TileGetFloatFn = double(__thiscall*)(Tile* tile, UInt32 trait);
 	using TileAnimateTraitFn = void(__thiscall*)(Tile* tile, UInt32 trait, float fromValue, float toValue, float duration);
-	using TileGetParentMenuFn = void*(__thiscall*)(Tile* tile);
-	using MenuGetOpenMenuTileFn = Tile*(__cdecl*)(UInt32 menuType);
+	using TileGetParentMenuFn = void* (__thiscall*)(Tile* tile);
+	using MenuGetOpenMenuTileFn = Tile * (__cdecl*)(UInt32 menuType);
 	using TileGetGlobalValueFn = double(__thiscall*)(Tile* tile);
 	using ActorGetGoldFn = int(__thiscall*)(Actor* actor);
-	using ActorValueGetNameFn = const char*(__cdecl*)(UInt32 actorValue);
-	using ActorValueGetIconFn = const char*(__cdecl*)(UInt32 actorValue);
+	using ActorValueGetNameFn = const char* (__cdecl*)(UInt32 actorValue);
+	using ActorValueGetIconFn = const char* (__cdecl*)(UInt32 actorValue);
 	using CalcMasteryFromSkillFn = UInt32(__cdecl*)(SInt32 skillLevel);
-	using ActorValueGetMasteryNameFn = const char*(__cdecl*)(UInt32 masteryLevel);
+	using ActorValueGetMasteryNameFn = const char* (__cdecl*)(UInt32 masteryLevel);
 	using ActorGetBaseCalcAViFn = UInt32(__thiscall*)(Actor* actor, UInt32 actorValue);
 	using ActorGetSkillMasteryLevelFn = UInt32(__thiscall*)(Actor* actor, UInt32 actorValue);
 	using OpenSkillPerkMenuFn = char(__cdecl*)(const char* xml, UInt32 unk1, UInt32 unk2, UInt32 unk3, UInt32 firstArgType, ...);
-	using TESObjectREFRGetAnimDataFn = ActorAnimData*(__thiscall*)(TESObjectREFR* refr);
+	using TESObjectREFRGetAnimDataFn = ActorAnimData * (__thiscall*)(TESObjectREFR* refr);
 	using ActorAnimDataRemovePowerAttackGroupsFn = void(__thiscall*)(ActorAnimData* animData);
 	using ObservedActorAnimDataBuildPowerAttackKFListFn = void(__thiscall*)(ActorAnimData* animData, TESObjectREFR* refr, UInt32 unk);
 	using GetWeaponSkillAVFn = UInt32(__thiscall*)(TESObjectWEAP* weapon);
@@ -687,7 +585,7 @@ namespace SpearSkill
 	using SkillsMenuUpdateAcceptFn = void(__thiscall*)(void* skillsMenu);
 	using SkillsMenuDetailsFn = void(__thiscall*)(void* skillsMenu, UInt32 value);
 	using SkillsMenuAcceptFn = void(__thiscall*)(void* skillsMenu, UInt32 buttonId, Tile* tile);
-	using SkillsMenuCreateSkillRowFn = Tile*(__thiscall*)(void* skillsMenu, const char* displayName, UInt32 rowValue);
+	using SkillsMenuCreateSkillRowFn = Tile * (__thiscall*)(void* skillsMenu, const char* displayName, UInt32 rowValue);
 	using SkillsMenuCloseFn = void(__cdecl*)();
 	using ClassMenuCommitFn = void(__thiscall*)(void* classMenu);
 	using ClassMenuRefreshDetailsFn = void(__thiscall*)(void* classMenu, void* displayedClass);
@@ -1267,16 +1165,16 @@ namespace SpearSkill
 		const MasteryPerkText& text = kMasteryPerkTexts[index];
 		switch (mastery)
 		{
-			case 1:
-				return text.apprentice;
-			case 2:
-				return text.journeyman;
-			case 3:
-				return text.expert;
-			case 4:
-				return text.master;
-			default:
-				return kSkillProgressionPlaceholderDescription;
+		case 1:
+			return text.apprentice;
+		case 2:
+			return text.journeyman;
+		case 3:
+			return text.expert;
+		case 4:
+			return text.master;
+		default:
+			return kSkillProgressionPlaceholderDescription;
 		}
 	}
 
@@ -1284,16 +1182,16 @@ namespace SpearSkill
 	{
 		switch (level)
 		{
-			case 25:
-				return kSpearApprenticeUpgradeDescription;
-			case 50:
-				return kSpearJourneymanUpgradeDescription;
-			case 75:
-				return kSpearExpertUpgradeDescription;
-			case 100:
-				return kSpearMasterUpgradeDescription;
-			default:
-				return kSkillProgressionPlaceholderDescription;
+		case 25:
+			return kSpearApprenticeUpgradeDescription;
+		case 50:
+			return kSpearJourneymanUpgradeDescription;
+		case 75:
+			return kSpearExpertUpgradeDescription;
+		case 100:
+			return kSpearMasterUpgradeDescription;
+		default:
+			return kSkillProgressionPlaceholderDescription;
 		}
 	}
 
@@ -1340,18 +1238,18 @@ namespace SpearSkill
 	{
 		switch (mastery)
 		{
-			case 0:
-				return kSpearNoviceRankSummary;
-			case 1:
-				return kSpearApprenticeRankSummary;
-			case 2:
-				return kSpearJourneymanRankSummary;
-			case 3:
-				return kSpearExpertRankSummary;
-			case 4:
-				return kSpearMasterRankSummary;
-			default:
-				return "";
+		case 0:
+			return kSpearNoviceRankSummary;
+		case 1:
+			return kSpearApprenticeRankSummary;
+		case 2:
+			return kSpearJourneymanRankSummary;
+		case 3:
+			return kSpearExpertRankSummary;
+		case 4:
+			return kSpearMasterRankSummary;
+		default:
+			return "";
 		}
 	}
 
@@ -1359,18 +1257,18 @@ namespace SpearSkill
 	{
 		switch (mastery)
 		{
-			case 0:
-				return kSpearNoviceRankDescription;
-			case 1:
-				return kSpearApprenticeRankDescription;
-			case 2:
-				return kSpearJourneymanRankDescription;
-			case 3:
-				return kSpearExpertRankDescription;
-			case 4:
-				return kSpearMasterRankDescription;
-			default:
-				return "";
+		case 0:
+			return kSpearNoviceRankDescription;
+		case 1:
+			return kSpearApprenticeRankDescription;
+		case 2:
+			return kSpearJourneymanRankDescription;
+		case 3:
+			return kSpearExpertRankDescription;
+		case 4:
+			return kSpearMasterRankDescription;
+		default:
+			return "";
 		}
 	}
 
@@ -1464,37 +1362,29 @@ namespace SpearSkill
 		if (index >= kSkillCount || !std::isfinite(progressDelta))
 			return false;
 
-		NormalizeState(index);
-		SkillState& state = g_state.states[index];
-		if (state.level >= kMaxSkillLevel)
-			return true;
+		// Routed through TCS's own interface now -- see this file's own
+		// g_tcs/g_messaging comment (top of file, inside namespace
+		// SpearSkill) for how/when that pointer is obtained. Requires a
+		// TCS-loaded "Spear.json" whose editorId matches
+		// SpearSkillShared::kSpearSkillName exactly ("Spear").
+		//
+		// Only supports POSITIVE progress now -- TCS_AddSkillXP itself
+		// rejects a non-positive amount outright. AddWeaponProgress
+		// (this function's only caller now, since the SidecarSkillCommands
+		// export was removed) already guards gain > 0 before calling
+		// here. Genuinely NOT equivalent to the old body for a
+		// hypothetical negative-delta caller -- there is none today, but
+		// note this if one is ever added.
+		//
+		// This mod's own g_state.states[]/StatsMenu row display is NOT
+		// updated by this call anymore -- expect it to show stale/frozen
+		// values until that duplicate UI machinery is removed in a later
+		// refactor step. Deliberate, temporary intermediate state, not an
+		// oversight.
+		if (!g_tcs || !g_tcs->AddSkillXP)
+			return false;
 
-		const UInt32 previousLevel = state.level;
-		UInt32 levelUps = 0;
-		state.progress += progressDelta;
-		if (!std::isfinite(state.progress) || state.progress < 0.0f)
-			state.progress = 0.0f;
-
-		while (state.level < kMaxSkillLevel && state.progress + kProgressEpsilon >= state.requiredProgress)
-		{
-			state.progress -= state.requiredProgress;
-			++state.level;
-			++state.levelUps;
-			++state.governingAttributeIncreaseCount;
-			++levelUps;
-			state.requiredProgress = RequiredProgressForLevel(index, state.level);
-		}
-
-		if (state.level >= kMaxSkillLevel)
-			state.progress = 0.0f;
-
-		if (levelUps)
-		{
-			MirrorLevelUpSideEffects(index, levelUps);
-			NotifyLevelIncrease(index, previousLevel, levelUps);
-		}
-		RefreshSidecarSkillDisplay(index);
-		return true;
+		return g_tcs->AddSkillXP(SpearSkillShared::kSpearSkillName, progressDelta);
 	}
 
 	static bool IsWeaponForm(const TESForm* form)
@@ -2077,11 +1967,18 @@ namespace SpearSkill
 		if (index >= kSkillCount)
 			return false;
 
-		NormalizeState(index);
+		// Read through TCS now instead of this mod's own g_state.states[]
+		// (which is no longer kept live -- see AddSkillProgress's own
+		// comment). Falls through to false (native AV) if the interface
+		// isn't available, same as every other g_tcs call site in this
+		// file.
+		if (!g_tcs || !g_tcs->GetSkillLevel)
+			return false;
+
 		if (outIndex)
 			*outIndex = index;
 		if (outLevel)
-			*outLevel = g_state.states[index].level;
+			*outLevel = g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
 		return true;
 	}
 
@@ -2101,9 +1998,11 @@ namespace SpearSkill
 		if (index >= kSkillCount || kSkills[index].fallbackActorValue != actorValue)
 			return false;
 
-		NormalizeState(index);
+		if (!g_tcs || !g_tcs->GetSkillLevel)
+			return false;
+
 		if (outLevel)
-			*outLevel = g_state.states[index].level;
+			*outLevel = g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
 		return true;
 	}
 
@@ -2157,7 +2056,7 @@ namespace SpearSkill
 			add esp, 8
 			mov ebx, eax
 			mov edx, [esi]
-			mov eax, [edx+284h]
+			mov eax, [edx + 284h]
 			push 11h
 			mov ecx, esi
 			call eax
@@ -2165,9 +2064,9 @@ namespace SpearSkill
 			jle keepCandidate
 			mov edx, kCombatSelectionHandToHandPreferred
 			jmp edx
-keepCandidate:
+			keepCandidate :
 			mov edx, kCombatSelectionHandToHandCompareContinue
-			jmp edx
+				jmp edx
 		}
 	}
 
@@ -2239,8 +2138,8 @@ keepCandidate:
 		{
 			push ecx
 			push edi
-			push dword ptr [esp + 0x10]
-			push dword ptr [esp + 0x10]
+			push dword ptr[esp + 0x10]
+			push dword ptr[esp + 0x10]
 			push ecx
 			call TrySetMagicPopupWeaponTypeLabel
 			add esp, 0x10
@@ -2248,8 +2147,8 @@ keepCandidate:
 			test al, al
 			jz chainOriginal
 			ret 0x08
-		chainOriginal:
-			jmp dword ptr [g_magicPopupEdiLabelOriginalTarget]
+			chainOriginal:
+			jmp dword ptr[g_magicPopupEdiLabelOriginalTarget]
 		}
 	}
 
@@ -2259,8 +2158,8 @@ keepCandidate:
 		{
 			push ecx
 			push ebp
-			push dword ptr [esp + 0x10]
-			push dword ptr [esp + 0x10]
+			push dword ptr[esp + 0x10]
+			push dword ptr[esp + 0x10]
 			push ecx
 			call TrySetMagicPopupWeaponTypeLabel
 			add esp, 0x10
@@ -2268,8 +2167,8 @@ keepCandidate:
 			test al, al
 			jz chainOriginal
 			ret 0x08
-		chainOriginal:
-			jmp dword ptr [g_magicPopupEbpLabelOriginalTarget]
+			chainOriginal:
+			jmp dword ptr[g_magicPopupEbpLabelOriginalTarget]
 		}
 	}
 
@@ -2335,16 +2234,16 @@ keepCandidate:
 		__asm
 		{
 			pushad
-			push dword ptr [esp + 36]
+			push dword ptr[esp + 36]
 			call PushBaseWeaponRatingContext
 			add esp, 4
 			popad
 
-			push dword ptr [esp + 16]
-			push dword ptr [esp + 16]
-			push dword ptr [esp + 16]
-			push dword ptr [esp + 16]
-			call dword ptr [g_equippableWeaponRatingSelectorOriginal]
+			push dword ptr[esp + 16]
+			push dword ptr[esp + 16]
+			push dword ptr[esp + 16]
+			push dword ptr[esp + 16]
+			call dword ptr[g_equippableWeaponRatingSelectorOriginal]
 
 			push eax
 			pushad
@@ -2391,8 +2290,10 @@ keepCandidate:
 
 	static UInt32 GetSpearTrainingCost()
 	{
-		NormalizeState(kSpearSkillIndex);
-		const float cost = static_cast<float>(g_state.states[kSpearSkillIndex].level) * GetTrainingCostMultiplier();
+		if (!g_tcs || !g_tcs->GetSkillLevel)
+			return 0;
+
+		const float cost = static_cast<float>(g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName)) * GetTrainingCostMultiplier();
 		if (!std::isfinite(cost) || cost <= 0.0f)
 			return 0;
 
@@ -2475,9 +2376,11 @@ keepCandidate:
 		if (!player)
 			return false;
 
-		NormalizeState(kSpearSkillIndex);
-		const SkillState& state = g_state.states[kSpearSkillIndex];
-		if (state.level >= trainerLevel || state.level >= kMaxSkillLevel)
+		if (!g_tcs || !g_tcs->GetSkillLevel)
+			return false;
+
+		const UInt32 level = g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
+		if (level >= trainerLevel || level >= kMaxSkillLevel)
 			return false;
 		if (player->trainingSessionsUsed >= GetTrainingSessionLimit())
 			return false;
@@ -2536,7 +2439,7 @@ keepCandidate:
 
 		_MESSAGE("SpearSkill: mapped trainer %08X to Spear training level=%u trainerLevel=%u nativeTrainerLevel=%u trainerLevelSource=%s cost=%u",
 			trainerBase ? trainerBase->refID : 0,
-			g_state.states[kSpearSkillIndex].level,
+			(g_tcs && g_tcs->GetSkillLevel) ? g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName) : 0,
 			trainerLevel,
 			nativeTrainerLevel,
 			usedNpcSidecarLevel ? "npc-sidecar" : (nativeTrainerLevel ? "native-ai" : "sidecar-default"),
@@ -2558,6 +2461,13 @@ keepCandidate:
 		TESForm* gold = LookupFormByID(kGoldFormId);
 		if (player && gold)
 			player->RemoveItem(gold, nullptr, cost, 0, 0, nullptr, 0, 0, 1, 0);
+	}
+
+	static UInt32 GetSpearSkill()
+	{
+		if (!g_tcs || !g_tcs->GetSkillLevel)
+			return 5;
+		return g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
 	}
 
 	static bool __cdecl HandleSpearTrainingMenuButton(UInt32 buttonId)
@@ -2598,7 +2508,7 @@ keepCandidate:
 		if (!TrainingPolicyCanPurchase(g_trainingPolicyState.trainerLevel, g_trainingPolicyState.cost))
 		{
 			_MESSAGE("SpearSkill: Spear training denied level=%u trainerLevel=%u cost=%u sessions=%u",
-				g_state.states[kSpearSkillIndex].level,
+				GetSpearSkill(),
 				g_trainingPolicyState.trainerLevel,
 				g_trainingPolicyState.cost,
 				GetPlayer() ? GetPlayer()->trainingSessionsUsed : 0);
@@ -2607,10 +2517,18 @@ keepCandidate:
 		}
 
 		NormalizeState(kSpearSkillIndex);
-		const UInt32 previousLevel = g_state.states[kSpearSkillIndex].level;
+		// Read via GetSpearSkill() (TCS-backed) rather than
+		// g_state.states[] directly -- SetSpearSkillClamped/ModSpearSkill
+		// no longer write to g_state.states[] at all since their own
+		// migration to TCS's SetSkillLevel, so a direct read here would
+		// always see stale, unchanging data and this "did training
+		// actually succeed" check would incorrectly report failure every
+		// single time, regardless of whether the real, TCS-backed level
+		// went up.
+		const UInt32 previousLevel = GetSpearSkill();
 		SetSpearProgress(0.0f);
 		ModSpearSkill(1);
-		if (g_state.states[kSpearSkillIndex].level <= previousLevel)
+		if (GetSpearSkill() <= previousLevel)
 		{
 			QueueUIMessage("Training failed.", 0, 1, 2.0f);
 			return true;
@@ -2625,7 +2543,7 @@ keepCandidate:
 		RemovePlayerGold(g_trainingPolicyState.cost);
 
 		_MESSAGE("SpearSkill: Spear training purchased newLevel=%u cost=%u sessions=%u",
-			g_state.states[kSpearSkillIndex].level,
+			GetSpearSkill(),
 			g_trainingPolicyState.cost,
 			player ? player->trainingSessionsUsed : 0);
 
@@ -2646,19 +2564,19 @@ keepCandidate:
 			test eax, eax
 			jnz callOriginal
 			mov eax, 005DD4B0h
-callOriginal:
+			callOriginal :
 			push offset afterOriginal
-			jmp eax
-afterOriginal:
+				jmp eax
+				afterOriginal :
 			pushad
-			push eax
-			call ApplySpearTrainingMenuAfterOpen
-			add esp, 4
-			popad
-			pop edx
-			xchg edx, dword ptr [esp]
-			push edx
-			ret
+				push eax
+				call ApplySpearTrainingMenuAfterOpen
+				add esp, 4
+				popad
+				pop edx
+				xchg edx, dword ptr[esp]
+				push edx
+				ret
 		}
 	}
 
@@ -2667,15 +2585,15 @@ afterOriginal:
 		__asm
 		{
 			pushad
-			mov eax, [esp+36]
+			mov eax, [esp + 36]
 			push eax
 			call HandleSpearTrainingMenuButton
 			add esp, 4
 			test al, al
 			popad
 			jnz handled
-			jmp dword ptr [g_trainingMenuButtonOriginal]
-handled:
+			jmp dword ptr[g_trainingMenuButtonOriginal]
+			handled:
 			ret 8
 		}
 	}
@@ -2684,9 +2602,16 @@ handled:
 	{
 		if (player == GetPlayer() && (actorValue == kActorVal_Blade || actorValue == kActorVal_Blunt))
 		{
-			const SpearSkillShared::WeaponSkillKind kind = ClassifySidecarWeapon(GetPlayerEquippedWeapon());
-			if (SkillConditionAllowsProgress(kind, actorValue, useType) &&
-				AddWeaponProgress(kind, useType, baseDelta))
+			TESObjectWEAP* equipped = GetPlayerEquippedWeapon();
+			const SpearSkillShared::WeaponSkillKind kind = ClassifySidecarWeapon(equipped);
+			_MESSAGE("SpearSkill: HookPlayerModExperience actorValue=%08X useType=%u baseDelta=%.4f equippedWeapon=%p classifiedKind=%d",
+				actorValue, useType, baseDelta, (void*)equipped, static_cast<int>(kind));
+
+			const bool conditionAllows = SkillConditionAllowsProgress(kind, actorValue, useType);
+			if (!conditionAllows)
+				_MESSAGE("SpearSkill: HookPlayerModExperience SkillConditionAllowsProgress=false (kind=%d, actorValue=%08X, useType=%u) -- falling through to original Player_ModExperience", static_cast<int>(kind), actorValue, useType);
+
+			if (conditionAllows && AddWeaponProgress(kind, useType, baseDelta))
 				return;
 		}
 
@@ -2784,19 +2709,19 @@ handled:
 	{
 		switch (sourceReturnAddress)
 		{
-			case kRetWeaponSkillEquippedDamage:
-				return damageReturnAddress == kRetEquippedWeaponDamage;
-			case kRetWeaponSkillPlayerInventoryRating:
-				return damageReturnAddress == kRetPlayerInventoryWeaponRating;
-			case kRetWeaponSkillEquippableRatingA:
-			case kRetWeaponSkillEquippableRatingB:
-				return damageReturnAddress == kRetEquippableWeaponRating;
-			case kRetWeaponSkillActorBaseEquippableRating:
-				return damageReturnAddress == kRetActorBaseEquippableWeaponRating;
-			case kRetWeaponSkillProjectileDamage:
-				return damageReturnAddress == kRetWeaponDamageWrapper;
-			default:
-				return false;
+		case kRetWeaponSkillEquippedDamage:
+			return damageReturnAddress == kRetEquippedWeaponDamage;
+		case kRetWeaponSkillPlayerInventoryRating:
+			return damageReturnAddress == kRetPlayerInventoryWeaponRating;
+		case kRetWeaponSkillEquippableRatingA:
+		case kRetWeaponSkillEquippableRatingB:
+			return damageReturnAddress == kRetEquippableWeaponRating;
+		case kRetWeaponSkillActorBaseEquippableRating:
+			return damageReturnAddress == kRetActorBaseEquippableWeaponRating;
+		case kRetWeaponSkillProjectileDamage:
+			return damageReturnAddress == kRetWeaponDamageWrapper;
+		default:
+			return false;
 		}
 	}
 
@@ -3303,11 +3228,11 @@ handled:
 	{
 		__asm
 		{
-			lea eax, [esp+30h]
+			lea eax, [esp + 30h]
 			push eax
 			push esi
 			call AddStatsMenuMasteryCounts
-			mov dword ptr [esp+14h], 5
+			mov dword ptr[esp + 14h], 5
 			xor ebx, ebx
 			mov eax, 005DAAB2h
 			jmp eax
@@ -3405,17 +3330,17 @@ handled:
 		__asm
 		{
 			pushad
-			mov eax, [esp+40]
+			mov eax, [esp + 40]
 			push eax
-			mov eax, [esp+40]
+			mov eax, [esp + 40]
 			push eax
 			push ecx
 			call HandleStatsMenuDetails
 			test al, al
 			popad
 			jnz handled
-			jmp dword ptr [g_statsMenuDetailsOriginal]
-handled:
+			jmp dword ptr[g_statsMenuDetailsOriginal]
+			handled:
 			ret 8
 		}
 	}
@@ -3796,15 +3721,15 @@ handled:
 		__asm
 		{
 			pushad
-			mov eax, [esp+36]
+			mov eax, [esp + 36]
 			push eax
 			push ecx
 			call HandleSkillsMenuDetails
 			test al, al
 			popad
 			jnz handled
-			jmp dword ptr [g_skillsMenuDetailsOriginal]
-handled:
+			jmp dword ptr[g_skillsMenuDetailsOriginal]
+			handled:
 			ret 4
 		}
 	}
@@ -3962,17 +3887,17 @@ handled:
 		__asm
 		{
 			pushad
-			mov eax, [esp+40]
+			mov eax, [esp + 40]
 			push eax
-			mov eax, [esp+40]
+			mov eax, [esp + 40]
 			push eax
 			push ecx
 			call HandleClassSkillPickerAccept
 			test al, al
 			popad
 			jnz handled
-			jmp dword ptr [g_skillsMenuAcceptOriginal]
-handled:
+			jmp dword ptr[g_skillsMenuAcceptOriginal]
+			handled:
 			ret 8
 		}
 	}
@@ -4601,109 +4526,98 @@ handled:
 		SeedSkillFromNative(kSpearSkillIndex, kActorVal_Blade);
 	}
 
-	static UInt32 GetSpearSkill()
-	{
-		NormalizeState(kSpearSkillIndex);
-		return g_state.states[kSpearSkillIndex].level;
-	}
-
+	// Both SetSpearSkillClamped and ModSpearSkill now route through TCS's
+	// own SetSkillLevel, which already mirrors NotifyLevelIncrease/
+	// ContributeMajorSkillAdvances/ContributeAttributeBonusBucket
+	// internally on the TCS side -- this mod's own equivalent calls
+	// (MirrorLevelUpSideEffects/NotifyLevelIncrease) are deliberately NOT
+	// called here anymore, since doing so would double up on both the
+	// level-up popup and the character's own major-skill-advance credit.
+	// RefreshSidecarSkillDisplay is also gone -- part of the UI machinery
+	// slated for deletion, and would only be touching stale data now
+	// regardless. RefreshPlayerWeaponSidecarPowerAttackGroups is kept: it
+	// reads mastery-dependent animation state, unrelated to the deleted
+	// UI display.
 	static void SetSpearSkillClamped(SInt64 level)
 	{
-		NormalizeState(kSpearSkillIndex);
-		SkillState& state = g_state.states[kSpearSkillIndex];
-		const UInt32 previousLevel = state.level;
-		if (level < 0)
-			state.level = 0;
-		else if (level > static_cast<SInt64>(kMaxSkillLevel))
-			state.level = kMaxSkillLevel;
-		else
-			state.level = static_cast<UInt32>(level);
-		NormalizeState(kSpearSkillIndex);
+		if (!g_tcs || !g_tcs->SetSkillLevel || !g_tcs->GetSkillLevel)
+			return;
 
-		if (state.level != previousLevel)
-		{
-			RefreshSidecarSkillDisplay(kSpearSkillIndex);
+		const UInt32 previousLevel = g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
+
+		UInt32 clamped;
+		if (level < 0)
+			clamped = 0;
+		else if (level > static_cast<SInt64>(kMaxSkillLevel))
+			clamped = kMaxSkillLevel;
+		else
+			clamped = static_cast<UInt32>(level);
+
+		g_tcs->SetSkillLevel(SpearSkillShared::kSpearSkillName, clamped);
+
+		if (clamped != previousLevel)
 			RefreshPlayerWeaponSidecarPowerAttackGroups();
-		}
 	}
 
 	static void ModSpearSkill(SInt32 delta)
 	{
-		NormalizeState(kSpearSkillIndex);
-		SkillState& state = g_state.states[kSpearSkillIndex];
-		if (delta <= 0)
-		{
-			SetSpearSkillClamped(static_cast<SInt64>(state.level) + static_cast<SInt64>(delta));
-			return;
-		}
-
-		if (state.level >= kMaxSkillLevel)
+		if (!g_tcs || !g_tcs->GetSkillLevel)
 			return;
 
-		const UInt32 previousLevel = state.level;
-		UInt32 increase = static_cast<UInt32>(delta);
-		const UInt32 room = kMaxSkillLevel - state.level;
-		if (increase > room)
-			increase = room;
-
-		float progressDebit = 0.0f;
-		for (UInt32 level = previousLevel; level < previousLevel + increase; ++level)
-			progressDebit += RequiredProgressForLevel(kSpearSkillIndex, level);
-
-		if (std::isfinite(progressDebit) && progressDebit > 0.0f)
-			state.progress = state.progress > progressDebit ? state.progress - progressDebit : 0.0f;
-
-		state.level += increase;
-		state.levelUps += increase;
-		state.governingAttributeIncreaseCount += increase;
-		NormalizeState(kSpearSkillIndex);
-		MirrorLevelUpSideEffects(kSpearSkillIndex, increase);
-		NotifyLevelIncrease(kSpearSkillIndex, previousLevel, increase);
-		RefreshSidecarSkillDisplay(kSpearSkillIndex);
+		const SInt64 currentLevel = static_cast<SInt64>(g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName));
+		SetSpearSkillClamped(currentLevel + static_cast<SInt64>(delta));
 	}
 
 	static float GetSpearProgress()
 	{
-		NormalizeState(kSpearSkillIndex);
-		return g_state.states[kSpearSkillIndex].progress;
+		if (!g_tcs || !g_tcs->GetSkillProgress)
+			return 0.0f;
+		return g_tcs->GetSkillProgress(SpearSkillShared::kSpearSkillName);
 	}
 
 	static void SetSpearProgress(float progress)
 	{
-		NormalizeState(kSpearSkillIndex);
-		g_state.states[kSpearSkillIndex].progress = progress;
-		NormalizeState(kSpearSkillIndex);
-		RefreshSidecarSkillDisplay(kSpearSkillIndex);
+		if (!g_tcs || !g_tcs->SetSkillProgress)
+			return;
+		g_tcs->SetSkillProgress(SpearSkillShared::kSpearSkillName, progress);
 	}
 
 	static float GetSpearRequiredProgress()
 	{
-		NormalizeState(kSpearSkillIndex);
-		return g_state.states[kSpearSkillIndex].requiredProgress;
+		if (!g_tcs || !g_tcs->GetSkillRequiredProgress)
+			return 1.0f;
+		return g_tcs->GetSkillRequiredProgress(SpearSkillShared::kSpearSkillName);
 	}
 
 	static UInt32 GetSpearLevelUps()
 	{
-		NormalizeState(kSpearSkillIndex);
-		return g_state.states[kSpearSkillIndex].levelUps;
+		if (!g_tcs || !g_tcs->GetSkillLevelUps)
+			return 0;
+		return g_tcs->GetSkillLevelUps(SpearSkillShared::kSpearSkillName);
 	}
 
 	static UInt32 GetSpearGoverningAttributeIncreases()
 	{
-		NormalizeState(kSpearSkillIndex);
-		return g_state.states[kSpearSkillIndex].governingAttributeIncreaseCount;
+		if (!g_tcs || !g_tcs->GetSkillGoverningAttributeIncreases)
+			return 0;
+		return g_tcs->GetSkillGoverningAttributeIncreases(SpearSkillShared::kSpearSkillName);
 	}
 
+	// Now backed by TCS's own GetSkillMastery, which wraps the SAME
+	// vanilla engine function (0x0056A300) this mod's own
+	// CalcMasteryFromSkill() presumably also wraps -- no threshold-drift
+	// risk either way, but routing through TCS keeps this reading live
+	// data instead of this mod's own now-stale g_state.states[].
 	static UInt32 GetSpearMastery()
 	{
-		NormalizeState(kSpearSkillIndex);
-		return CalcMasteryFromSkill()(static_cast<SInt32>(g_state.states[kSpearSkillIndex].level));
+		if (!g_tcs || !g_tcs->GetSkillMastery)
+			return 0;
+		return g_tcs->GetSkillMastery(SpearSkillShared::kSpearSkillName);
 	}
 
 	static UInt32 GetSpearPerkMask()
 	{
-		NormalizeState(kSpearSkillIndex);
-		const UInt32 level = g_state.states[kSpearSkillIndex].level;
+		const UInt32 level = GetSpearSkill();
 		UInt32 mask = 0;
 		if (level >= 25)
 			mask |= 1u;
@@ -4718,8 +4632,9 @@ handled:
 
 	static bool IsSpearMajorSkill()
 	{
-		NormalizeState(kSpearSkillIndex);
-		return IsEffectiveMajor(kSpearSkillIndex);
+		if (!g_tcs || !g_tcs->IsSkillMajor)
+			return false;
+		return g_tcs->IsSkillMajor(SpearSkillShared::kSpearSkillName);
 	}
 
 	static bool SaveWeaponTypeSidecars()
@@ -4893,6 +4808,13 @@ handled:
 		switch (message->type)
 		{
 		case OBSEMessagingInterface::kMessage_PostPostLoad:
+			if (g_messaging && g_messaging->Dispatch)
+				g_messaging->Dispatch(g_pluginHandle, kMessage_TCSGetInterface, &g_tcs, sizeof(g_tcs), "TrueCustomSkills");
+			if (!g_tcs)
+				_ERROR("SpearSkill: failed to obtain True Custom Skills interface -- is TCS installed?");
+			else if (g_tcs->interfaceVersion < 1)
+				_ERROR("SpearSkill: True Custom Skills interface is older than expected (version %u, need >= 2) -- AddSkillXP unavailable", g_tcs->interfaceVersion);
+
 			if (!InstallHooksOnce())
 				_ERROR("SpearSkill: failed to install native hooks after OBSE plugin load");
 			break;
@@ -4909,383 +4831,78 @@ handled:
 		}
 	}
 
-	static bool SidecarIsSpearSkill(UInt32 skillId)
-	{
-		return skillId == SpearSkillShared::kSpearSkillId;
-	}
-
-	static bool SidecarCommandValueToLevel(double value, UInt32* outLevel)
-	{
-		if (outLevel)
-			*outLevel = 0;
-		if (!std::isfinite(value))
-			return false;
-
-		if (value <= 0.0)
-		{
-			if (outLevel)
-				*outLevel = 0;
-			return true;
-		}
-		if (value >= 100.0)
-		{
-			if (outLevel)
-				*outLevel = 100;
-			return true;
-		}
-
-		if (outLevel)
-			*outLevel = static_cast<UInt32>(value);
-		return true;
-	}
-
-	static bool SidecarCommandValueToDelta(double value, SInt32* outDelta)
-	{
-		if (outDelta)
-			*outDelta = 0;
-		if (!std::isfinite(value))
-			return false;
-
-		if (value >= 2147483647.0)
-		{
-			if (outDelta)
-				*outDelta = 2147483647;
-			return true;
-		}
-		if (value <= -2147483648.0)
-		{
-			if (outDelta)
-				*outDelta = static_cast<SInt32>(0x80000000);
-			return true;
-		}
-
-		if (outDelta)
-			*outDelta = static_cast<SInt32>(value);
-		return true;
-	}
-
-	static TESNPC* SidecarCommandNpc(void* npc)
-	{
-		return AsNpcForm(static_cast<TESForm*>(npc));
-	}
-
-	static bool SidecarGetSpearAV(UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-		if (outValue)
-			*outValue = static_cast<double>(GetSpearSkill());
-		return true;
-	}
-
-	static bool SidecarSetSpearAV(UInt32 skillId, double value)
-	{
-		UInt32 level = 0;
-		if (!SidecarIsSpearSkill(skillId) || !SidecarCommandValueToLevel(value, &level))
-			return false;
-
-		SetSpearSkillClamped(level);
-		return true;
-	}
-
-	static bool SidecarModSpearAV(UInt32 skillId, double value)
-	{
-		SInt32 delta = 0;
-		if (!SidecarIsSpearSkill(skillId) || !SidecarCommandValueToDelta(value, &delta))
-			return false;
-
-		ModSpearSkill(delta);
-		return true;
-	}
-
-	static bool SidecarAdvanceSpearSkill(UInt32 skillId, double value)
-	{
-		if (!SidecarIsSpearSkill(skillId) || !std::isfinite(value))
-			return false;
-
-		return AddSkillProgress(kSpearSkillIndex, static_cast<float>(value));
-	}
-
-	static bool SidecarGetSpearProgress(UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-		if (outValue)
-			*outValue = static_cast<double>(GetSpearProgress());
-		return true;
-	}
-
-	static bool SidecarSetSpearProgress(UInt32 skillId, double value)
-	{
-		if (!SidecarIsSpearSkill(skillId) || !std::isfinite(value))
-			return false;
-
-		SetSpearProgress(static_cast<float>(value));
-		return true;
-	}
-
-	static bool SidecarGetSpearRequiredProgress(UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-		if (outValue)
-			*outValue = static_cast<double>(GetSpearRequiredProgress());
-		return true;
-	}
-
-	static bool SidecarGetSpearLevelUps(UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-		if (outValue)
-			*outValue = static_cast<double>(GetSpearLevelUps());
-		return true;
-	}
-
-	static bool SidecarIsSpearWeapon(UInt32 skillId, void* form, bool* outResult)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-		if (outResult)
-			*outResult = IsSpearWeapon(static_cast<TESForm*>(form));
-		return true;
-	}
-
-	static bool SidecarGetNpcSpearEntry(TESNPC* npc, SpearSkillShared::NpcSpearEntry* outEntry)
-	{
-		if (outEntry)
-			std::memset(outEntry, 0, sizeof(*outEntry));
-		if (!npc || !npc->refID)
-			return false;
-
-		EnsureNpcSpearStoreConfigured();
-		return g_npcSkillStore.TryGet(npc->refID, outEntry);
-	}
-
-	static bool SidecarSetNpcSpearEntry(TESNPC* npc, UInt32 level, float progress, UInt32 levelUps)
-	{
-		if (!npc || !npc->refID)
-			return false;
-
-		EnsureNpcSpearStoreConfigured();
-		return g_npcSkillStore.Set(npc->refID, level, progress, levelUps);
-	}
-
-	static bool SidecarGetNpcSpearAV(void* npcForm, UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-
-		UInt32 level = 0;
-		const bool found = TryGetNpcSpearSkill(SidecarCommandNpc(npcForm), &level);
-		if (outValue)
-			*outValue = static_cast<double>(level);
-		return found;
-	}
-
-	static bool SidecarSetNpcSpearAV(void* npcForm, UInt32 skillId, double value)
-	{
-		UInt32 level = 0;
-		TESNPC* npc = SidecarCommandNpc(npcForm);
-		if (!SidecarIsSpearSkill(skillId) || !SidecarCommandValueToLevel(value, &level) || !npc)
-			return false;
-
-		SpearSkillShared::NpcSpearEntry entry = {};
-		if (!SidecarGetNpcSpearEntry(npc, &entry))
-		{
-			entry.formId = npc->refID;
-			entry.progress = 0.0f;
-			entry.levelUps = 0;
-		}
-
-		return SidecarSetNpcSpearEntry(npc, level, entry.progress, entry.levelUps);
-	}
-
-	static bool SidecarModNpcSpearAV(void* npcForm, UInt32 skillId, double value)
-	{
-		SInt32 delta = 0;
-		TESNPC* npc = SidecarCommandNpc(npcForm);
-		if (!SidecarIsSpearSkill(skillId) || !SidecarCommandValueToDelta(value, &delta) || !npc)
-			return false;
-
-		SpearSkillShared::NpcSpearEntry entry = {};
-		if (!SidecarGetNpcSpearEntry(npc, &entry))
-		{
-			entry.formId = npc->refID;
-			entry.level = 0;
-			entry.progress = 0.0f;
-			entry.levelUps = 0;
-		}
-
-		if (delta <= 0)
-		{
-			const SInt64 adjustedLevel = static_cast<SInt64>(entry.level) + static_cast<SInt64>(delta);
-			const UInt32 level = adjustedLevel <= 0 ? 0 : adjustedLevel >= 100 ? 100 : static_cast<UInt32>(adjustedLevel);
-			return SidecarSetNpcSpearEntry(npc, level, entry.progress, entry.levelUps);
-		}
-
-		if (entry.level >= 100)
-			return SidecarSetNpcSpearEntry(npc, entry.level, entry.progress, entry.levelUps);
-
-		UInt32 increase = static_cast<UInt32>(delta);
-		const UInt32 room = 100 - entry.level;
-		if (increase > room)
-			increase = room;
-
-		float progressDebit = 0.0f;
-		for (UInt32 advancingLevel = entry.level; advancingLevel < entry.level + increase; ++advancingLevel)
-			progressDebit += RequiredProgressForLevel(kSpearSkillIndex, advancingLevel);
-		if (std::isfinite(progressDebit) && progressDebit > 0.0f)
-			entry.progress = entry.progress > progressDebit ? entry.progress - progressDebit : 0.0f;
-
-		return SidecarSetNpcSpearEntry(npc, entry.level + increase, entry.progress, entry.levelUps + increase);
-	}
-
-	static bool SidecarGetNpcSpearProgress(void* npcForm, UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-
-		SpearSkillShared::NpcSpearEntry entry = {};
-		const bool found = SidecarGetNpcSpearEntry(SidecarCommandNpc(npcForm), &entry);
-		if (outValue)
-			*outValue = found ? static_cast<double>(entry.progress) : 0.0;
-		return found;
-	}
-
-	static bool SidecarSetNpcSpearProgress(void* npcForm, UInt32 skillId, double value)
-	{
-		TESNPC* npc = SidecarCommandNpc(npcForm);
-		if (!SidecarIsSpearSkill(skillId) || !npc || !std::isfinite(value))
-			return false;
-
-		SpearSkillShared::NpcSpearEntry entry = {};
-		if (!SidecarGetNpcSpearEntry(npc, &entry))
-		{
-			entry.formId = npc->refID;
-			entry.level = 0;
-			entry.levelUps = 0;
-		}
-
-		return SidecarSetNpcSpearEntry(npc, entry.level, static_cast<float>(value), entry.levelUps);
-	}
-
-	static bool SidecarGetNpcSpearRequiredProgress(void* npcForm, UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-
-		SpearSkillShared::NpcSpearEntry entry = {};
-		const bool found = SidecarGetNpcSpearEntry(SidecarCommandNpc(npcForm), &entry);
-		if (outValue)
-			*outValue = found ? static_cast<double>(RequiredProgressForLevel(kSpearSkillIndex, entry.level)) : 0.0;
-		return found;
-	}
-
-	static bool SidecarGetNpcSpearLevelUps(void* npcForm, UInt32 skillId, double* outValue)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-
-		SpearSkillShared::NpcSpearEntry entry = {};
-		const bool found = SidecarGetNpcSpearEntry(SidecarCommandNpc(npcForm), &entry);
-		if (outValue)
-			*outValue = found ? static_cast<double>(entry.levelUps) : 0.0;
-		return found;
-	}
-
-	static bool SidecarHasNpcSpearSkill(void* npcForm, UInt32 skillId, bool* outResult)
-	{
-		if (!SidecarIsSpearSkill(skillId))
-			return false;
-
-		TESNPC* npc = SidecarCommandNpc(npcForm);
-		EnsureNpcSpearStoreConfigured();
-		if (outResult)
-			*outResult = npc && g_npcSkillStore.Has(npc->refID);
-		return npc != nullptr;
-	}
-
-	static bool SidecarClearNpcSpearSkill(void* npcForm, UInt32 skillId)
-	{
-		TESNPC* npc = SidecarCommandNpc(npcForm);
-		if (!SidecarIsSpearSkill(skillId) || !npc)
-			return false;
-
-		EnsureNpcSpearStoreConfigured();
-		return g_npcSkillStore.Remove(npc->refID);
-	}
-
-	static const SidecarSkillCommandsShared::SidecarSkillProvider kSidecarSkillProviders[] =
-	{
-		{
-			SidecarSkillCommandsShared::kSidecarSkillProviderApiVersion,
-			sizeof(SidecarSkillCommandsShared::SidecarSkillProvider),
-			SpearSkillShared::kSpearSkillId,
-			"Spear",
-			"SpearSkill|SPER",
-			&SidecarGetSpearAV,
-			&SidecarGetSpearAV,
-			&SidecarSetSpearAV,
-			&SidecarModSpearAV,
-			&SidecarSetSpearAV,
-			&SidecarAdvanceSpearSkill,
-			&SidecarModSpearAV,
-			&SidecarGetSpearProgress,
-			&SidecarSetSpearProgress,
-			&SidecarGetSpearRequiredProgress,
-			&SidecarGetSpearLevelUps,
-			&SidecarIsSpearWeapon,
-			nullptr,
-			nullptr,
-			nullptr,
-			nullptr,
-			&SidecarGetNpcSpearAV,
-			&SidecarGetNpcSpearAV,
-			&SidecarSetNpcSpearAV,
-			&SidecarModNpcSpearAV,
-			&SidecarSetNpcSpearAV,
-			&SidecarGetNpcSpearProgress,
-			&SidecarSetNpcSpearProgress,
-			&SidecarGetNpcSpearRequiredProgress,
-			&SidecarGetNpcSpearLevelUps,
-			&SidecarHasNpcSpearSkill,
-			&SidecarClearNpcSpearSkill,
-		},
-	};
-
-	static const SidecarSkillCommandsShared::SidecarSkillProviderTable kSidecarSkillProviderTable =
-	{
-		SidecarSkillCommandsShared::kSidecarSkillProviderApiVersion,
-		sizeof(SidecarSkillCommandsShared::SidecarSkillProviderTable),
-		sizeof(kSidecarSkillProviders) / sizeof(kSidecarSkillProviders[0]),
-		kSidecarSkillProviders,
-	};
-
-	static const SidecarSkillCommandsShared::SidecarSkillProviderTable* GetSidecarSkillProviderTableInternal()
-	{
-		return &kSidecarSkillProviderTable;
-	}
-
 	static void RegisterMessaging(const OBSEInterface* obse)
 	{
 		if (!obse || !obse->QueryInterface || g_pluginHandle == kPluginHandle_Invalid)
 			return;
 
-		OBSEMessagingInterface* messaging =
+		g_messaging =
 			static_cast<OBSEMessagingInterface*>(obse->QueryInterface(kInterface_Messaging));
-		if (messaging && messaging->RegisterListener)
-			messaging->RegisterListener(g_pluginHandle, "OBSE", MessageHandler);
+		if (g_messaging && g_messaging->RegisterListener)
+			g_messaging->RegisterListener(g_pluginHandle, "OBSE", MessageHandler);
 	}
+
+	// Temporary debug commands -- added specifically because neither the
+	// (now-removed) SidecarSkillCommands export nor a CSE-authored
+	// trainer NPC are available for testing the TCS migration end to
+	// end. SpearSetLevel exercises SetSpearSkillClamped -> TCS's
+	// SetSkillLevel directly; SpearGetInfo surfaces every TCS-backed
+	// read-only value at once, since none of them have any other
+	// in-game-visible surface yet (Spear's own StatsMenu row still shows
+	// stale data until that UI machinery is deleted).
+	bool Cmd_SpearSetLevel_Execute(COMMAND_ARGS)
+	{
+		UInt32 level = 0;
+		*result = 0.0;
+
+		if (!ExtractArgs(PASS_EXTRACT_ARGS, &level))
+			return true;
+
+		SetSpearSkillClamped(static_cast<SInt64>(level));
+		*result = static_cast<double>(GetSpearSkill());
+		Console_Print("Spear level set to %u", GetSpearSkill());
+		_MESSAGE("SpearSkill: SpearSetLevel requested=%u actual=%u", level, GetSpearSkill());
+		return true;
+	}
+
+	DEFINE_COMMAND_PLUGIN(SpearSetLevel,
+		"debug: directly sets the Spear skill level via TCS's SetSkillLevel (temporary, for testing the TCS migration)",
+		0, 1, kParams_OneInt);
+
+	bool Cmd_SpearGetInfo_Execute(COMMAND_ARGS)
+	{
+		*result = static_cast<double>(GetSpearSkill());
+
+		Console_Print("Spear level=%u progress=%.2f/%.2f levelUps=%u governingAttrIncreases=%u mastery=%u major=%s perkMask=%u",
+			GetSpearSkill(),
+			GetSpearProgress(),
+			GetSpearRequiredProgress(),
+			GetSpearLevelUps(),
+			GetSpearGoverningAttributeIncreases(),
+			GetSpearMastery(),
+			IsSpearMajorSkill() ? "true" : "false",
+			GetSpearPerkMask());
+
+		_MESSAGE("SpearSkill: SpearGetInfo level=%u progress=%.2f/%.2f levelUps=%u governingAttrIncreases=%u mastery=%u major=%d perkMask=%u",
+			GetSpearSkill(),
+			GetSpearProgress(),
+			GetSpearRequiredProgress(),
+			GetSpearLevelUps(),
+			GetSpearGoverningAttributeIncreases(),
+			GetSpearMastery(),
+			IsSpearMajorSkill() ? 1 : 0,
+			GetSpearPerkMask());
+		return true;
+	}
+
+	DEFINE_COMMAND_PLUGIN(SpearGetInfo,
+		"debug: prints every TCS-backed Spear skill value at once (temporary, for testing the TCS migration)",
+		0, 0, NULL);
+
 }
 
 extern "C"
 {
-	const SidecarSkillCommandsShared::SidecarSkillProviderTable* GetSidecarSkillProviderTable()
-	{
-		return SpearSkill::GetSidecarSkillProviderTableInternal();
-	}
-
 	bool OBSEPlugin_Query(const OBSEInterface* obse, PluginInfo* info)
 	{
 		if (!obse || !info)
@@ -5316,7 +4933,12 @@ extern "C"
 		SpearSkill::ResetState();
 		SpearSkill::RegisterSerializationCallbacks();
 		SpearSkill::RegisterMessaging(obse);
+
+		if (!obse->RegisterCommand(&SpearSkill::kCommandInfo_SpearSetLevel))
+			_ERROR("SpearSkill: failed to register SpearSetLevel debug command");
+		if (!obse->RegisterCommand(&SpearSkill::kCommandInfo_SpearGetInfo))
+			_ERROR("SpearSkill: failed to register SpearGetInfo debug command");
+
 		return true;
 	}
 }
-
