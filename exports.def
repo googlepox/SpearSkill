@@ -1,0 +1,4 @@
+LIBRARY	"SpearSkill"
+EXPORTS
+OBSEPlugin_Query
+OBSEPlugin_Load
