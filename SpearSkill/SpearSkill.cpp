@@ -82,14 +82,6 @@ namespace SpearSkill
 		"Hours of spear drill have taught you to finish a fight before your opponent can close the distance. "
 		"You are now a Master with Spear weapons. Your Rushing power attack now has a chance to paralyze your opponent. "
 		"Press and hold Attack while moving forward to use this power attack.";
-	static constexpr const char* kSpearApprenticePerkText =
-		kSpearApprenticeRankDescription;
-	static constexpr const char* kSpearJourneymanPerkText =
-		kSpearJourneymanRankDescription;
-	static constexpr const char* kSpearExpertPerkText =
-		kSpearExpertRankDescription;
-	static constexpr const char* kSpearMasterPerkText =
-		kSpearMasterRankDescription;
 	static constexpr const char* kSpearApprenticeUpgradeDescription = kSpearApprenticeRankSummary;
 	static constexpr const char* kSpearJourneymanUpgradeDescription = kSpearJourneymanRankSummary;
 	static constexpr const char* kSpearExpertUpgradeDescription = kSpearExpertRankSummary;
@@ -102,19 +94,6 @@ namespace SpearSkill
 	static constexpr UInt32 kTESActorBaseGetEquippableItemRatingPatchLength = 5;
 	static constexpr UInt32 kEquippableWeaponRatingSelector = 0x0048BDA0;
 	static constexpr UInt32 kEquippableWeaponRatingSelectorPatchLength = 9;
-	static constexpr UInt32 kStatsMenuCreateRows = 0x005DC630;
-	static constexpr UInt32 kStatsMenuRefresh = 0x005DA1A0;
-	static constexpr UInt32 kStatsMenuDetails = 0x005DBBD0;
-	static constexpr UInt32 kStatsMenuMasteryCountsPatch = 0x005DAAA0;
-	static constexpr UInt32 kSkillsMenuPreselect = 0x005D5D40;
-	static constexpr UInt32 kSkillsMenuUpdateAccept = 0x005D5AB0;
-	static constexpr UInt32 kSkillsMenuDetails = 0x005D5B40;
-	static constexpr UInt32 kSkillsMenuAccept = 0x005D5E50;
-	static constexpr UInt32 kSkillsMenuCreateSkillRow = 0x005D6270;
-	static constexpr UInt32 kSkillsMenuClose = 0x005D5720;
-	static constexpr UInt32 kClassMenuCommit = 0x005973F0;
-	static constexpr UInt32 kClassMenuRefreshDetails = 0x00596CF0;
-	static constexpr UInt32 kClassMenuStepRefresh = 0x00584390;
 	static constexpr UInt32 kMenuCreateTileFromTemplate = 0x00585410;
 	static constexpr UInt32 kTileSetFloat = 0x0058CEB0;
 	static constexpr UInt32 kTileSetString = 0x0058CED0;
@@ -182,25 +161,6 @@ namespace SpearSkill
 	static constexpr UInt32 kRetPowerAttackBonus = 0x005FF4E6;
 	static constexpr UInt32 kRetWeaponDamageWrapper = 0x005471CC;
 
-	static constexpr UInt32 kStatsMenuSummaryTileOffset = 0x30;
-	static constexpr UInt32 kStatsMenuSkillParentOffset = 0x3C;
-	static constexpr UInt32 kStatsMenuFocusTileOffset = 0x54;
-	static constexpr UInt32 kStatsMenuDetailTileOffset = 0x58;
-	static constexpr UInt32 kStatsMenuSkillRowsOffset = 0x60;
-	static constexpr UInt32 kSkillsMenuTileOffset = 0x04;
-	static constexpr UInt32 kSkillsMenuListTileOffset = 0x28;
-	static constexpr UInt32 kSkillsMenuAcceptButtonOffset = 0x34;
-	static constexpr UInt32 kSkillsMenuModeOffset = 0x3C;
-	static constexpr UInt32 kSkillsMenuCurrentValueOffset = 0x40;
-	static constexpr UInt32 kSkillsMenuSelectionCapOffset = 0x44;
-	static constexpr UInt32 kSkillsMenuSelectedTileOffset = 0x48;
-	static constexpr UInt32 kSkillsMenuClassMenuOffset = 0x4C;
-	static constexpr UInt32 kClassMenuTileOffset = 0x04;
-	static constexpr UInt32 kClassMenuSelectedClassOffset = 0x3C;
-	static constexpr UInt32 kClassMenuCustomClassOffset = 0x40;
-	static constexpr UInt32 kClassMenuCurrentPickerValueOffset = 0x48;
-	static constexpr UInt32 kClassMenuStepOffset = 0x58;
-	static constexpr UInt32 kClassMenuSelectedSkillsOffset = 0x68;
 	static constexpr UInt32 kTESFormFormIdOffset = 0x0C;
 	static constexpr UInt32 kTrainingMenuTrainerOffset = 0x54;
 	static constexpr UInt32 kTrainingMenuNativeSkillOffset = 0x58;
@@ -214,54 +174,14 @@ namespace SpearSkill
 	static constexpr UInt32 kTrainingMenuTrainButton = 6;
 	static constexpr UInt32 kTrainingMenuCloseButton = 7;
 	static constexpr UInt32 kGoldFormId = 0x0000000F;
-	static constexpr UInt32 kPickerRowSelectedTrait = kTileValue_user3;
-	static constexpr UInt32 kPickerRowValueTrait = kTileValue_user2;
-	static constexpr UInt32 kPickerSyntheticSkillIdTrait = kTileValue_user22;
-	static constexpr UInt32 kPickerSyntheticMarkerTrait = kTileValue_user23;
-	static constexpr UInt32 kStatsRowSyntheticSkillIdTrait = kTileValue_user22;
-	static constexpr UInt32 kStatsRowSyntheticMarkerTrait = kTileValue_user23;
-	static constexpr UInt32 kSkillsMenuForwardEnabledTrait = kTileValue_user9;
-	static constexpr UInt32 kTileValue_heightRaw = 0x00000FC9;
-	static constexpr float kSyntheticPickerNativeValueSentinel = 0.0f;
 	static constexpr UInt32 kStatsMenuMasteryRankCount = 5;
 	static constexpr UInt32 kGenericMenuArgInt = 0;
 	static constexpr UInt32 kGenericMenuArgFloat = 1;
 	static constexpr UInt32 kGenericMenuArgString = 2;
 	static constexpr UInt32 kGenericMenuArgEnd = 3;
-	static constexpr float kStatsFocusDepthInset = 0.5f;
-	static constexpr float kStatsFocusSizeInset = 12.0f;
-	static constexpr float kStatsFocusYOffset = 10.0f;
-	static constexpr const char* kStatsSkillTemplate = "stat_skill_template";
 	static constexpr const char* kSkillPerkMenuXml = "skill_perk.xml";
 	static constexpr const char* kSkillPerkOkText = "OK";
 
-	static constexpr UInt32 kStatsMenuCreateRowsCall = 0x005DCCA3;
-	static constexpr UInt32 kSkillsMenuPreselectCall = 0x005D65E3;
-	static constexpr UInt32 kClassMenuCommitCall = 0x00597521;
-	static constexpr UInt32 kClassMenuRefreshDetailsCalls[] =
-	{
-		0x00597682,
-		0x00597121,
-		0x00597189,
-		0x005971C9,
-		0x005974C1,
-	};
-	static constexpr UInt32 kStatsMenuRefreshCalls[] =
-	{
-		0x0057A78F,
-		0x005DC8CB,
-		0x005DCC9C,
-		0x005DCE34,
-		0x005DCEE5,
-		0x005DCEFC,
-	};
-
-	static constexpr UInt32 kActorValueGetNamePatchLength = 7;
-	static constexpr UInt32 kStatsMenuDetailsPatchLength = 14;
-	static constexpr UInt32 kStatsMenuMasteryCountsPatchLength = 10;
-	static constexpr UInt32 kSkillsMenuUpdateAcceptPatchLength = 5;
-	static constexpr UInt32 kSkillsMenuDetailsPatchLength = 7;
-	static constexpr UInt32 kSkillsMenuAcceptPatchLength = 14;
 	static constexpr UInt32 kWeaponRatingNpcContextDepth = 8;
 
 	static const UInt8 kPlayerModExperienceExpected[kPlayerModExperiencePatchLength] =
@@ -288,39 +208,6 @@ namespace SpearSkill
 		0xE8, 0x86, 0xC7, 0xFA, 0xFF,
 		0x83, 0xC4, 0x04,
 		0x85, 0xC0
-	};
-	static const UInt8 kActorValueGetNameExpected[kActorValueGetNamePatchLength] =
-	{
-		0x8B, 0x44, 0x24, 0x04,
-		0x83, 0xF8, 0x27
-	};
-	static const UInt8 kStatsMenuDetailsExpected[kStatsMenuDetailsPatchLength] =
-	{
-		0x6A, 0xFF,
-		0x68, 0xF0, 0x20, 0x9C, 0x00,
-		0x64, 0xA1, 0x00, 0x00, 0x00, 0x00,
-		0x50
-	};
-	static const UInt8 kStatsMenuMasteryCountsExpected[kStatsMenuMasteryCountsPatchLength] =
-	{
-		0xC7, 0x44, 0x24, 0x14, 0x05, 0x00, 0x00, 0x00,
-		0xEB, 0x08
-	};
-	static const UInt8 kSkillsMenuUpdateAcceptExpected[kSkillsMenuUpdateAcceptPatchLength] =
-	{
-		0x56, 0x8B, 0xF1, 0x8B, 0x06
-	};
-	static const UInt8 kSkillsMenuDetailsExpected[kSkillsMenuDetailsPatchLength] =
-	{
-		0x8B, 0x44, 0x24, 0x04,
-		0x83, 0xF8, 0xFF
-	};
-	static const UInt8 kSkillsMenuAcceptExpected[kSkillsMenuAcceptPatchLength] =
-	{
-		0x6A, 0xFF,
-		0x68, 0xD8, 0x5B, 0x9B, 0x00,
-		0x64, 0xA1, 0x00, 0x00, 0x00, 0x00,
-		0x50
 	};
 	static const UInt8 kTESObjectWEAPGetWeaponSkillAVExpected[] =
 	{
@@ -398,40 +285,11 @@ namespace SpearSkill
 		UInt8 padding[3];
 	};
 
-	struct SkillLevelProgression
-	{
-		UInt32 level;
-		float progressionValue;
-		float scalingValue;
-		const char* upgradeDescription;
-	};
-
-	struct SkillProgressionDefinition
-	{
-		UInt32 skillId;
-		const SkillLevelProgression* levels;
-		UInt32 levelCount;
-	};
-
 	struct SkillUseCondition
 	{
 		SpearSkillShared::WeaponSkillKind kind;
 		UInt32 nativeActorValue;
 		UInt32 useType;
-	};
-
-	struct MasteryPerkText
-	{
-		const char* apprentice;
-		const char* journeyman;
-		const char* expert;
-		const char* master;
-	};
-
-	struct SaveState
-	{
-		UInt32 version;
-		SkillState states[kSkillCount];
 	};
 
 	struct SavedWeaponTypeEntry
@@ -451,36 +309,9 @@ namespace SpearSkill
 		SpearSkillShared::WeaponSkillKind kind;
 	};
 
-	struct StatsRow
-	{
-		Tile* tile;
-		bool placementLogged;
-		float lastLoggedOrder;
-	};
-
-	struct PickerRow
-	{
-		Tile* tile;
-		bool placementLogged;
-	};
-
-	struct TrainingPolicyState
-	{
-		void* menu;
-		TESNPC* trainerBase;
-		UInt32 trainerLevel;
-		UInt32 cost;
-		bool used;
-	};
-
 	static const SkillDefinition kSkills[kSkillCount] =
 	{
 		{ SpearSkillShared::kSpearSkillId, "Spear", kSpearSkillDisplayName, TESClass::eSpec_Combat, kActorVal_Endurance, kActorVal_Blade, kSpearSkillIconPath, kSpearSkillRowIconPath, kVanillaBladeSkillIconPath, kVanillaBladeSkillSmallIconPath, kSpearSkillDescription, kSpearClassPickerDescription },
-	};
-
-	static const SkillProgressionDefinition kSkillProgressions[kSkillCount] =
-	{
-		{ SpearSkillShared::kSpearSkillId, kDefaultSkillLevelProgression, kSkillProgressionLevelCount },
 	};
 
 	static const SkillUseCondition kSkillUseConditions[kSkillCount] =
@@ -488,34 +319,11 @@ namespace SpearSkill
 		{ SpearSkillShared::kWeaponSkill_Spear, kActorVal_Blade, kWeaponSuccessfulHitUseType },
 	};
 
-	static const MasteryPerkText kMasteryPerkTexts[kSkillCount] =
-	{
-		{
-			kSpearApprenticePerkText,
-			kSpearJourneymanPerkText,
-			kSpearExpertPerkText,
-			kSpearMasterPerkText,
-		},
-	};
-
-	static SaveState g_state = {};
 	static SpearSkillShared::WeaponTypeSidecarStore g_weaponTypeStore;
 	static SpearSkillShared::NpcSpearStore g_npcSkillStore;
 	static SpearSkillShared::NpcSpearTrainingStore g_npcTrainingStore;
 	static bool g_npcSkillStoreConfigured = false;
-	static StatsRow g_statsRows[kSkillCount] = {};
-	static PickerRow g_pickerRows[kSkillCount] = {};
-	static void* g_statsMenu = nullptr;
-	static void* g_classPickerSkillsMenu = nullptr;
-	static void* g_stagedClassMenu = nullptr;
-	static bool g_stagedSelections[kSkillCount] = {};
-	static UInt32 g_stagedForeignSyntheticSelectionCount = 0;
-	static UInt32 g_stagedSelectedSyntheticSkillIds[kNativeClassMajorCount] = {};
-	static UInt32 g_stagedSelectedSyntheticSkillCount = 0;
-	static bool g_stagedUsed = false;
 	static bool g_statsOrderingDirty = false;
-	static bool g_insideStatsMenuCreateRows = false;
-	static bool g_loggedStatsRowCreateFailure = false;
 	static bool g_loggedLegacySelfWeaponTypeFallback = false;
 	static bool g_loggedWeaponTypeCarrierStoreFull = false;
 	static bool g_loggedLegacySelfNpcSkillFallback = false;
@@ -524,29 +332,17 @@ namespace SpearSkill
 	static UInt32 g_appliedPatches = 0;
 	static UInt32 g_failedPatches = 0;
 	static PendingWeaponSkillConsumer g_pendingWeaponSkillConsumer = {};
-	static TrainingPolicyState g_trainingPolicyState = {};
 	static TESNPC* g_weaponRatingNpcContext[kWeaponRatingNpcContextDepth] = {};
 	static UInt32 g_weaponRatingNpcContextDepth = 0;
 	static UInt32 g_weaponRatingNpcContextOverflowDepth = 0;
 	static void* g_playerModExperienceOriginal = nullptr;
 	static void* g_actorBaseGetEquippableItemRatingOriginal = nullptr;
 	static void* g_equippableWeaponRatingSelectorOriginal = nullptr;
-	static void* g_actorValueGetNameOriginal = nullptr;
 	static void* g_getWeaponSkillAVOriginal = nullptr;
 	static void* g_calcWeaponDamageOriginal = nullptr;
 	static void* g_calcPowerAttackBonusOriginal = nullptr;
-	static void* g_statsMenuDetailsOriginal = nullptr;
-	static void* g_skillsMenuUpdateAcceptOriginal = nullptr;
-	static void* g_skillsMenuDetailsOriginal = nullptr;
-	static void* g_skillsMenuAcceptOriginal = nullptr;
 	static void* g_trainingMenuOpenOriginal = nullptr;
 	static void* g_trainingMenuButtonOriginal = nullptr;
-	static bool g_skillsMenuAcceptChainedExisting = false;
-	static UInt32 g_statsMenuCreateRowsOriginalTarget = kStatsMenuCreateRows;
-	static UInt32 g_statsMenuRefreshOriginalTarget = kStatsMenuRefresh;
-	static UInt32 g_skillsMenuPreselectOriginalTarget = kSkillsMenuPreselect;
-	static UInt32 g_classMenuCommitOriginalTarget = kClassMenuCommit;
-	static UInt32 g_classMenuRefreshDetailsOriginalTarget = kClassMenuRefreshDetails;
 	static UInt32 g_weaponPerkMasteryOriginalTarget = kActorGetSkillMasteryLevel;
 	static UInt32 g_weaponPerkBaseCalcOriginalTarget = kActorGetBaseCalcAVi;
 	static UInt32 g_dialogueTrainingOffersServiceOriginalTarget = kTESAIFormOffersService;
@@ -557,8 +353,6 @@ namespace SpearSkill
 
 	using PlayerModExperienceFn = void(__thiscall*)(PlayerCharacter* player, UInt32 actorValue, UInt32 useType, float baseDelta);
 	using TESActorBaseGetEquippableItemRatingFn = double(__thiscall*)(TESForm* actorBase, TESForm* item);
-	using StatsMenuCreateRowsFn = void(__thiscall*)(void* statsMenu);
-	using StatsMenuRefreshFn = void(__thiscall*)(void* statsMenu, UInt32 actorValue);
 	using MenuCreateTileFromTemplateFn = Tile * (__thiscall*)(void* menu, Tile* parent, const char* templateName, UInt32 unk);
 	using TileSetFloatFn = void(__thiscall*)(Tile* tile, UInt32 trait, float value);
 	using TileSetStringFn = void(__thiscall*)(Tile* tile, UInt32 trait, const char* value);
@@ -581,15 +375,6 @@ namespace SpearSkill
 	using GetWeaponSkillAVFn = UInt32(__thiscall*)(TESObjectWEAP* weapon);
 	using CalcWeaponDamageFn = double(__cdecl*)(int weaponSkill, int luck, int strengthOrAgility, float fatigue, int weaponDamage, float condition, float multiplier, float ignoreFatigue);
 	using CalcPowerAttackBonusFn = double(__cdecl*)(int skillLevel, int attackType);
-	using SkillsMenuPreselectFn = void(__thiscall*)(void* skillsMenu);
-	using SkillsMenuUpdateAcceptFn = void(__thiscall*)(void* skillsMenu);
-	using SkillsMenuDetailsFn = void(__thiscall*)(void* skillsMenu, UInt32 value);
-	using SkillsMenuAcceptFn = void(__thiscall*)(void* skillsMenu, UInt32 buttonId, Tile* tile);
-	using SkillsMenuCreateSkillRowFn = Tile * (__thiscall*)(void* skillsMenu, const char* displayName, UInt32 rowValue);
-	using SkillsMenuCloseFn = void(__cdecl*)();
-	using ClassMenuCommitFn = void(__thiscall*)(void* classMenu);
-	using ClassMenuRefreshDetailsFn = void(__thiscall*)(void* classMenu, void* displayedClass);
-	using ClassMenuStepRefreshFn = void(__thiscall*)(void* classMenu);
 	using TESAIFormOffersServiceFn = bool(__thiscall*)(void* aiForm, UInt32 serviceMask);
 	using TrainingMenuCloseFn = void(__cdecl*)();
 	using PlayerMaybeStartNextAttributeBonusBucketFn = void(__thiscall*)(PlayerCharacter* player);
@@ -608,21 +393,6 @@ namespace SpearSkill
 	static TESActorBaseGetEquippableItemRatingFn TESActorBaseGetEquippableItemRatingOriginal()
 	{
 		return reinterpret_cast<TESActorBaseGetEquippableItemRatingFn>(g_actorBaseGetEquippableItemRatingOriginal);
-	}
-
-	static StatsMenuCreateRowsFn StatsMenuCreateRowsOriginal()
-	{
-		return reinterpret_cast<StatsMenuCreateRowsFn>(g_statsMenuCreateRowsOriginalTarget);
-	}
-
-	static StatsMenuRefreshFn StatsMenuRefreshOriginal()
-	{
-		return reinterpret_cast<StatsMenuRefreshFn>(g_statsMenuRefreshOriginalTarget);
-	}
-
-	static MenuCreateTileFromTemplateFn MenuCreateTileFromTemplate()
-	{
-		return reinterpret_cast<MenuCreateTileFromTemplateFn>(kMenuCreateTileFromTemplate);
 	}
 
 	static TileSetFloatFn TileSetFloat()
@@ -672,20 +442,7 @@ namespace SpearSkill
 
 	static ActorValueGetNameFn ActorValueGetName()
 	{
-		if (g_actorValueGetNameOriginal)
-			return reinterpret_cast<ActorValueGetNameFn>(g_actorValueGetNameOriginal);
-
 		return reinterpret_cast<ActorValueGetNameFn>(kActorValueGetName);
-	}
-
-	static ActorValueGetIconFn ActorValueGetIcon()
-	{
-		return reinterpret_cast<ActorValueGetIconFn>(kActorValueGetIcon);
-	}
-
-	static ActorGetGoldFn ActorGetGold()
-	{
-		return reinterpret_cast<ActorGetGoldFn>(kActorGetGold);
 	}
 
 	static CalcMasteryFromSkillFn CalcMasteryFromSkill()
@@ -718,11 +475,6 @@ namespace SpearSkill
 		return reinterpret_cast<ActorGetSkillMasteryLevelFn>(g_weaponPerkMasteryOriginalTarget);
 	}
 
-	static OpenSkillPerkMenuFn OpenSkillPerkMenu()
-	{
-		return reinterpret_cast<OpenSkillPerkMenuFn>(kOpenSkillPerkMenu);
-	}
-
 	static TESObjectREFRGetAnimDataFn TESObjectREFRGetAnimData()
 	{
 		return reinterpret_cast<TESObjectREFRGetAnimDataFn>(kTESObjectREFRGetAnimData);
@@ -751,221 +503,6 @@ namespace SpearSkill
 	static CalcPowerAttackBonusFn CalcPowerAttackBonusOriginal()
 	{
 		return reinterpret_cast<CalcPowerAttackBonusFn>(g_calcPowerAttackBonusOriginal);
-	}
-
-	static SkillsMenuPreselectFn SkillsMenuPreselectOriginal()
-	{
-		return reinterpret_cast<SkillsMenuPreselectFn>(g_skillsMenuPreselectOriginalTarget);
-	}
-
-	static SkillsMenuUpdateAcceptFn SkillsMenuUpdateAcceptOriginal()
-	{
-		return reinterpret_cast<SkillsMenuUpdateAcceptFn>(g_skillsMenuUpdateAcceptOriginal);
-	}
-
-	static SkillsMenuDetailsFn SkillsMenuDetailsOriginal()
-	{
-		return reinterpret_cast<SkillsMenuDetailsFn>(g_skillsMenuDetailsOriginal);
-	}
-
-	static SkillsMenuAcceptFn SkillsMenuAcceptOriginal()
-	{
-		return reinterpret_cast<SkillsMenuAcceptFn>(g_skillsMenuAcceptOriginal);
-	}
-
-	static SkillsMenuCreateSkillRowFn SkillsMenuCreateSkillRow()
-	{
-		return reinterpret_cast<SkillsMenuCreateSkillRowFn>(kSkillsMenuCreateSkillRow);
-	}
-
-	static SkillsMenuCloseFn SkillsMenuClose()
-	{
-		return reinterpret_cast<SkillsMenuCloseFn>(kSkillsMenuClose);
-	}
-
-	static ClassMenuCommitFn ClassMenuCommitOriginal()
-	{
-		return reinterpret_cast<ClassMenuCommitFn>(g_classMenuCommitOriginalTarget);
-	}
-
-	static ClassMenuRefreshDetailsFn ClassMenuRefreshDetailsOriginal()
-	{
-		return reinterpret_cast<ClassMenuRefreshDetailsFn>(g_classMenuRefreshDetailsOriginalTarget);
-	}
-
-	static ClassMenuStepRefreshFn ClassMenuStepRefresh()
-	{
-		return reinterpret_cast<ClassMenuStepRefreshFn>(kClassMenuStepRefresh);
-	}
-
-	static TESAIFormOffersServiceFn DialogueTrainingOffersServiceOriginal()
-	{
-		return reinterpret_cast<TESAIFormOffersServiceFn>(g_dialogueTrainingOffersServiceOriginalTarget);
-	}
-
-	static PlayerMaybeStartNextAttributeBonusBucketFn PlayerMaybeStartNextAttributeBonusBucket()
-	{
-		return reinterpret_cast<PlayerMaybeStartNextAttributeBonusBucketFn>(kPlayerMaybeStartNextAttributeBonusBucket);
-	}
-
-	static PlayerIncrementAttributeBonusBucketFn PlayerIncrementAttributeBonusBucket()
-	{
-		return reinterpret_cast<PlayerIncrementAttributeBonusBucketFn>(kPlayerIncrementAttributeBonusBucket);
-	}
-
-	static TrainingMenuCloseFn TrainingMenuClose()
-	{
-		return reinterpret_cast<TrainingMenuCloseFn>(kTrainingMenuClose);
-	}
-
-	static float GetGameSettingFloatOrDefault(const char* name, float fallback)
-	{
-		SettingInfo* setting = nullptr;
-		if (GetGameSetting(const_cast<char*>(name), &setting) && setting && std::isfinite(setting->f))
-			return setting->f;
-
-		return fallback;
-	}
-
-	static UInt32 GetGameSettingUIntOrDefault(const char* name, UInt32 fallback)
-	{
-		SettingInfo* setting = nullptr;
-		if (GetGameSetting(const_cast<char*>(name), &setting) && setting && setting->i >= 0)
-			return static_cast<UInt32>(setting->i);
-
-		return fallback;
-	}
-
-	static UInt32 GetLevelUpSkillCount()
-	{
-		SettingInfo* setting = nullptr;
-		if (GetGameSetting(const_cast<char*>("iLevelUpSkillCount"), &setting) && setting && setting->i > 0)
-			return static_cast<UInt32>(setting->i);
-
-		return 10;
-	}
-
-	static bool SkillClassUsesSpecialization(const SkillDefinition& skill)
-	{
-		PlayerCharacter* player = GetPlayer();
-		if (!player)
-			return false;
-
-		TESClass* playerClass = player->GetPlayerClass();
-		return playerClass && playerClass->specialization == skill.specialization &&
-			skill.governingAttributeAV <= kActorVal_Luck;
-	}
-
-	static bool PlayerClassHasNativeMajor(UInt32 actorValue)
-	{
-		PlayerCharacter* player = GetPlayer();
-		TESClass* playerClass = player ? player->GetPlayerClass() : nullptr;
-		if (!playerClass)
-			return false;
-
-		for (UInt32 i = 0; i < kNativeClassMajorCount; ++i)
-		{
-			if (playerClass->majorSkills[i] == actorValue)
-				return true;
-		}
-		return false;
-	}
-
-	static bool InheritsLegacyNativeMajor(UInt32 index)
-	{
-		return false;
-	}
-
-	static bool IsEffectiveMajor(UInt32 index)
-	{
-		return index < kSkillCount && (g_state.states[index].major || InheritsLegacyNativeMajor(index));
-	}
-
-	static UInt32 ClampProgressionLevel(UInt32 level)
-	{
-		if (!level)
-			return 1;
-		if (level > kMaxSkillLevel)
-			return kMaxSkillLevel;
-		return level;
-	}
-
-	static const SkillLevelProgression& GetSkillLevelProgression(UInt32 skillIndex, UInt32 level)
-	{
-		static const SkillLevelProgression fallbackProgression =
-		{
-			1,
-			1.0f,
-			1.0f,
-			kSkillProgressionPlaceholderDescription
-		};
-
-		if (skillIndex >= kSkillCount)
-			return fallbackProgression;
-
-		const SkillProgressionDefinition& progression = kSkillProgressions[skillIndex];
-		const UInt32 clampedLevel = ClampProgressionLevel(level);
-		if (progression.levels && progression.levelCount > clampedLevel)
-			return progression.levels[clampedLevel];
-
-		return fallbackProgression;
-	}
-
-	static float RequiredProgressForLevel(UInt32 skillIndex, UInt32 level)
-	{
-		if (skillIndex >= kSkillCount)
-			return 1.0f;
-
-		const SkillLevelProgression& progression = GetSkillLevelProgression(skillIndex, level);
-		const float atLevel = progression.scalingValue > 0.0f ? progression.scalingValue : static_cast<float>(level ? level : 1);
-		const float skillUseFactor = GetGameSettingFloatOrDefault("fSkillUseFactor", 1.0f);
-		const float skillUseExp = GetGameSettingFloatOrDefault("fSkillUseExp", 1.0f);
-		const float skillUseMajorMult = GetGameSettingFloatOrDefault("fSkillUseMajorMult", 1.0f);
-		const float skillUseMinorMult = GetGameSettingFloatOrDefault("fSkillUseMinorMult", 1.0f);
-		const float skillUseSpecMult = GetGameSettingFloatOrDefault("fSkillUseSpecMult", 1.0f);
-		const float classMultiplier = IsEffectiveMajor(skillIndex) ? skillUseMajorMult : skillUseMinorMult;
-		const float specMultiplier = SkillClassUsesSpecialization(kSkills[skillIndex]) ? skillUseSpecMult : 1.0f;
-		const double requirement =
-			std::pow(static_cast<double>(skillUseFactor) * atLevel, static_cast<double>(skillUseExp)) *
-			static_cast<double>(classMultiplier) *
-			static_cast<double>(specMultiplier);
-
-		if (std::isfinite(requirement) && requirement > 0.0)
-			return static_cast<float>(requirement);
-
-		return 1.0f + atLevel;
-	}
-
-	static void NormalizeState(UInt32 index)
-	{
-		SkillState& state = g_state.states[index];
-		if (state.level > kMaxSkillLevel)
-			state.level = kMaxSkillLevel;
-		if (!std::isfinite(state.progress) || state.progress < 0.0f)
-			state.progress = 0.0f;
-		state.requiredProgress = RequiredProgressForLevel(index, state.level);
-		if (!std::isfinite(state.requiredProgress) || state.requiredProgress <= 0.0f)
-			state.requiredProgress = 1.0f;
-		if (state.level >= kMaxSkillLevel)
-			state.progress = 0.0f;
-		state.major = state.major ? 1 : 0;
-	}
-
-	static void ResetState()
-	{
-		std::memset(&g_state, 0, sizeof(g_state));
-		g_state.version = kSaveVersion;
-		g_stagedClassMenu = nullptr;
-		std::memset(g_stagedSelections, 0, sizeof(g_stagedSelections));
-		g_stagedForeignSyntheticSelectionCount = 0;
-		std::memset(g_stagedSelectedSyntheticSkillIds, 0, sizeof(g_stagedSelectedSyntheticSkillIds));
-		g_stagedSelectedSyntheticSkillCount = 0;
-		g_stagedUsed = false;
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			g_state.states[i].level = 5;
-			g_state.states[i].requiredProgress = 1.0f;
-		}
 	}
 
 	static UInt32 GetSkillIndexById(UInt32 skillId)
@@ -1019,40 +556,6 @@ namespace SpearSkill
 		return menu ? *reinterpret_cast<Tile**>(reinterpret_cast<UInt8*>(menu) + offset) : nullptr;
 	}
 
-	static Tile* GetStatsMenuSummaryTile(void* statsMenu)
-	{
-		return GetMenuTileAtOffset(statsMenu, kStatsMenuSummaryTileOffset);
-	}
-
-	static Tile* GetStatsMenuSkillParent(void* statsMenu)
-	{
-		return GetMenuTileAtOffset(statsMenu, kStatsMenuSkillParentOffset);
-	}
-
-	static Tile* GetStatsMenuFocusTile(void* statsMenu)
-	{
-		return GetMenuTileAtOffset(statsMenu, kStatsMenuFocusTileOffset);
-	}
-
-	static Tile* GetStatsMenuDetailTile(void* statsMenu)
-	{
-		return GetMenuTileAtOffset(statsMenu, kStatsMenuDetailTileOffset);
-	}
-
-	static Tile* GetNativeStatsRow(void* statsMenu, UInt32 nativeSkillOffset)
-	{
-		if (!statsMenu || nativeSkillOffset >= kNativeSkillCount)
-			return nullptr;
-
-		return *reinterpret_cast<Tile**>(
-			reinterpret_cast<UInt8*>(statsMenu) + kStatsMenuSkillRowsOffset + nativeSkillOffset * sizeof(Tile*));
-	}
-
-	static bool HasNativeStatsRows(void* statsMenu)
-	{
-		return GetNativeStatsRow(statsMenu, 0) != nullptr;
-	}
-
 	static float GetTileFloat(Tile* tile, UInt32 trait)
 	{
 		return tile ? static_cast<float>(TileGetFloat()(tile, trait)) : 0.0f;
@@ -1078,154 +581,6 @@ namespace SpearSkill
 		return "";
 	}
 
-	static const char* __cdecl HookActorValueGetName(UInt32 actorValue)
-	{
-		if (ActorValueGetNameFn original = ActorValueGetName())
-			return original(actorValue);
-
-		return "";
-	}
-
-	static const char* GetSafeActorValueIcon(UInt32 actorValue)
-	{
-		if (ActorValueGetIconFn getIcon = ActorValueGetIcon())
-		{
-			if (const char* icon = getIcon(actorValue))
-			{
-				if (icon[0])
-					return icon;
-			}
-		}
-
-		return "";
-	}
-
-	static bool LooseFileExists(const char* path)
-	{
-		if (!path || !path[0])
-			return false;
-
-		const DWORD attributes = GetFileAttributesA(path);
-		return attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY) == 0;
-	}
-
-	static bool LooseTextureAssetExists(const char* texturePath)
-	{
-		if (!texturePath || !texturePath[0])
-			return false;
-
-		char path[MAX_PATH] = {};
-		_snprintf_s(path, sizeof(path), _TRUNCATE, "Data\\Textures\\%s", texturePath);
-		if (LooseFileExists(path))
-			return true;
-
-		_snprintf_s(path, sizeof(path), _TRUNCATE, "Textures\\%s", texturePath);
-		if (LooseFileExists(path))
-			return true;
-
-		_snprintf_s(path, sizeof(path), _TRUNCATE, "Data\\%s", texturePath);
-		if (LooseFileExists(path))
-			return true;
-
-		return LooseFileExists(texturePath);
-	}
-
-	static const char* GetSidecarSkillFallbackIcon(UInt32 index)
-	{
-		if (index < kSkillCount && kSkills[index].fallbackIconPath && kSkills[index].fallbackIconPath[0])
-			return kSkills[index].fallbackIconPath;
-
-		return "";
-	}
-
-	static const char* GetSidecarSkillIcon(UInt32 index)
-	{
-		if (index < kSkillCount && kSkills[index].iconPath && LooseTextureAssetExists(kSkills[index].iconPath))
-			return kSkills[index].iconPath;
-
-		return GetSidecarSkillFallbackIcon(index);
-	}
-
-	static const char* GetSidecarSkillRowIcon(UInt32 index)
-	{
-		if (index < kSkillCount && kSkills[index].rowIconPath && LooseTextureAssetExists(kSkills[index].rowIconPath))
-			return kSkills[index].rowIconPath;
-
-		if (index < kSkillCount && kSkills[index].fallbackRowIconPath && kSkills[index].fallbackRowIconPath[0])
-			return kSkills[index].fallbackRowIconPath;
-
-		return GetSidecarSkillIcon(index);
-	}
-
-	static const char* GetSidecarMasteryPerkText(UInt32 index, UInt32 mastery)
-	{
-		if (index >= kSkillCount || mastery == 0 || mastery >= kStatsMenuMasteryRankCount)
-			return kSkillProgressionPlaceholderDescription;
-
-		const MasteryPerkText& text = kMasteryPerkTexts[index];
-		switch (mastery)
-		{
-		case 1:
-			return text.apprentice;
-		case 2:
-			return text.journeyman;
-		case 3:
-			return text.expert;
-		case 4:
-			return text.master;
-		default:
-			return kSkillProgressionPlaceholderDescription;
-		}
-	}
-
-	static const char* GetSpearUpgradeDescription(UInt32 level)
-	{
-		switch (level)
-		{
-		case 25:
-			return kSpearApprenticeUpgradeDescription;
-		case 50:
-			return kSpearJourneymanUpgradeDescription;
-		case 75:
-			return kSpearExpertUpgradeDescription;
-		case 100:
-			return kSpearMasterUpgradeDescription;
-		default:
-			return kSkillProgressionPlaceholderDescription;
-		}
-	}
-
-	static const char* GetSkillUpgradeDescription(UInt32 index, const SkillLevelProgression& progression)
-	{
-		if (index == kSpearSkillIndex)
-			return GetSpearUpgradeDescription(progression.level);
-
-		return progression.upgradeDescription ? progression.upgradeDescription : kSkillProgressionPlaceholderDescription;
-	}
-
-	static bool ShowSidecarMasteryPerkPopup(UInt32 index, UInt32 mastery)
-	{
-		if (index >= kSkillCount || mastery == 0 || mastery >= kStatsMenuMasteryRankCount)
-			return false;
-
-		const char* icon = GetSidecarSkillIcon(index);
-		const char* description = GetSidecarMasteryPerkText(index, mastery);
-		if (!icon || !icon[0] || !description || !description[0])
-			return false;
-
-		return OpenSkillPerkMenu()(kSkillPerkMenuXml,
-			0,
-			1,
-			0,
-			kGenericMenuArgString,
-			icon,
-			kGenericMenuArgString,
-			description,
-			kGenericMenuArgString,
-			kSkillPerkOkText,
-			kGenericMenuArgEnd) != 0;
-	}
-
 	static const char* GetSafeMasteryName(UInt32 level)
 	{
 		if (const char* name = ActorValueGetMasteryName()(CalcMasteryFromSkill()(static_cast<SInt32>(level))))
@@ -1234,153 +589,14 @@ namespace SpearSkill
 		return "";
 	}
 
-	static const char* GetSpearRankSummaryForMastery(UInt32 mastery)
-	{
-		switch (mastery)
-		{
-		case 0:
-			return kSpearNoviceRankSummary;
-		case 1:
-			return kSpearApprenticeRankSummary;
-		case 2:
-			return kSpearJourneymanRankSummary;
-		case 3:
-			return kSpearExpertRankSummary;
-		case 4:
-			return kSpearMasterRankSummary;
-		default:
-			return "";
-		}
-	}
-
-	static const char* GetSpearRankDescriptionForMastery(UInt32 mastery)
-	{
-		switch (mastery)
-		{
-		case 0:
-			return kSpearNoviceRankDescription;
-		case 1:
-			return kSpearApprenticeRankDescription;
-		case 2:
-			return kSpearJourneymanRankDescription;
-		case 3:
-			return kSpearExpertRankDescription;
-		case 4:
-			return kSpearMasterRankDescription;
-		default:
-			return "";
-		}
-	}
-
-	static const char* GetSidecarRankSummaryForMastery(UInt32 index, UInt32 mastery)
-	{
-		if (index == kSpearSkillIndex)
-			return GetSpearRankSummaryForMastery(mastery);
-
-		return "";
-	}
-
-	static const char* GetSidecarRankDescriptionForMastery(UInt32 index, UInt32 mastery)
-	{
-		if (index == kSpearSkillIndex)
-			return GetSpearRankDescriptionForMastery(mastery);
-
-		return "";
-	}
-
-	static float GetProgressFraction(UInt32 index)
-	{
-		const SkillState& state = g_state.states[index];
-		if (state.level >= kMaxSkillLevel || state.requiredProgress <= 0.0f)
-			return 0.0f;
-
-		const float fraction = state.progress / state.requiredProgress;
-		if (!std::isfinite(fraction) || fraction < 0.0f)
-			return 0.0f;
-		if (fraction > 1.0f)
-			return 1.0f;
-		return fraction;
-	}
-
-	static void RefreshSidecarSkillDisplay(UInt32 index);
-	static void RefreshPlayerWeaponSidecarPowerAttackGroups();
 	static void SetSpearProgress(float progress);
 	static void ModSpearSkill(SInt32 delta);
-
-	static void MirrorLevelUpSideEffects(UInt32 index, UInt32 levelUps)
-	{
-		if (!levelUps)
-			return;
-
-		PlayerCharacter* player = GetPlayer();
-		if (!player)
-			return;
-
-		for (UInt32 i = 0; i < levelUps; ++i)
-		{
-			if (kSkills[index].governingAttributeAV <= kActorVal_Luck)
-				PlayerIncrementAttributeBonusBucket()(player, kSkills[index].governingAttributeAV);
-
-			if (IsEffectiveMajor(index))
-			{
-				++player->majorSkillAdvances;
-				if (GetLevelUpSkillCount())
-					PlayerMaybeStartNextAttributeBonusBucket()(player);
-
-				if (GetLevelUpSkillCount() && player->majorSkillAdvances >= GetLevelUpSkillCount())
-					player->bCanLevelUp = 1;
-			}
-		}
-	}
-
-	static void NotifyLevelIncrease(UInt32 index, UInt32 previousLevel, UInt32 levelUps)
-	{
-		if (!levelUps)
-			return;
-
-		char message[256] = {};
-		_snprintf_s(message, sizeof(message), _TRUNCATE, "Your %s skill increased to %u.",
-			kSkills[index].name,
-			g_state.states[index].level);
-		QueueUIMessage(message, 0, 1, 2.0f);
-
-		const UInt32 previousMastery = CalcMasteryFromSkill()(static_cast<SInt32>(previousLevel));
-		const UInt32 newMastery = CalcMasteryFromSkill()(static_cast<SInt32>(g_state.states[index].level));
-		if (newMastery > previousMastery && newMastery < kStatsMenuMasteryRankCount)
-		{
-			_snprintf_s(message, sizeof(message), _TRUNCATE, "You are now a %s in %s.",
-				GetSafeMasteryName(g_state.states[index].level),
-				kSkills[index].name);
-			QueueUIMessage(message, 0, 1, 4.0f);
-			ShowSidecarMasteryPerkPopup(index, newMastery);
-			RefreshPlayerWeaponSidecarPowerAttackGroups();
-		}
-	}
 
 	static bool AddSkillProgress(UInt32 index, float progressDelta)
 	{
 		if (index >= kSkillCount || !std::isfinite(progressDelta))
 			return false;
 
-		// Routed through TCS's own interface now -- see this file's own
-		// g_tcs/g_messaging comment (top of file, inside namespace
-		// SpearSkill) for how/when that pointer is obtained. Requires a
-		// TCS-loaded "Spear.json" whose editorId matches
-		// SpearSkillShared::kSpearSkillName exactly ("Spear").
-		//
-		// Only supports POSITIVE progress now -- TCS_AddSkillXP itself
-		// rejects a non-positive amount outright. AddWeaponProgress
-		// (this function's only caller now, since the SidecarSkillCommands
-		// export was removed) already guards gain > 0 before calling
-		// here. Genuinely NOT equivalent to the old body for a
-		// hypothetical negative-delta caller -- there is none today, but
-		// note this if one is ever added.
-		//
-		// This mod's own g_state.states[]/StatsMenu row display is NOT
-		// updated by this call anymore -- expect it to show stale/frozen
-		// values until that duplicate UI machinery is removed in a later
-		// refactor step. Deliberate, temporary intermediate state, not an
-		// oversight.
 		if (!g_tcs || !g_tcs->AddSkillXP)
 			return false;
 
@@ -1839,84 +1055,6 @@ namespace SpearSkill
 			totals.skippedRows);
 	}
 
-	static void LoadEditorNpcSpearTrainingSidecars(bool preserveExistingIfNoCarriers)
-	{
-		if (!g_dataHandler || !*g_dataHandler || !(*g_dataHandler)->boundObjects)
-		{
-			if (!preserveExistingIfNoCarriers)
-				g_npcTrainingStore.Clear();
-			return;
-		}
-
-		SpearSkillShared::NpcSpearTrainingStore importedStore;
-		SpearSkillShared::NpcSpearPayloadStats totals = {};
-		const UInt8 activeModCount = (*g_dataHandler)->GetActiveModCount();
-		for (UInt32 modIndex = 0; modIndex < activeModCount; ++modIndex)
-		{
-			const char* carrierModName = (*g_dataHandler)->GetNthModName(modIndex);
-			for (TESBoundObject* object = (*g_dataHandler)->boundObjects->first; object; object = object->next)
-			{
-				if (object->typeID != kFormType_Book || (object->refID >> 24) != modIndex)
-					continue;
-
-				TESObjectBOOK* book = reinterpret_cast<TESObjectBOOK*>(object);
-				const char* payload = book->description.GetDescription();
-				if (!SpearSkillShared::NpcSpearTrainingPayloadCodec::LooksLikePayload(payload))
-					continue;
-
-				++totals.carrierRecords;
-				std::vector<SpearSkillShared::NpcSpearTrainingPayloadRow> rows;
-				SpearSkillShared::NpcSpearPayloadStats stats = {};
-				if (!SpearSkillShared::NpcSpearTrainingPayloadCodec::Parse(payload, rows, &stats, NpcSkillStoreLog, nullptr))
-				{
-					totals.skippedRows += stats.skippedRows;
-					continue;
-				}
-
-				totals.parsedEntries += stats.parsedEntries;
-				totals.skippedRows += stats.skippedRows;
-				for (size_t i = 0; i < rows.size(); ++i)
-				{
-					UInt32 resolvedFormId = 0;
-					if (!ResolveNpcSpearKeyToRuntimeFormID(rows[i].key, carrierModName, &resolvedFormId))
-					{
-						++totals.unresolvedEntries;
-						continue;
-					}
-
-					if (importedStore.SetLoaded(resolvedFormId))
-					{
-						++totals.resolvedEntries;
-					}
-					else
-					{
-						++totals.unresolvedEntries;
-						if (!g_loggedNpcTrainingCarrierStoreFull)
-						{
-							_WARNING("SpearSkill: embedded NPC Spear training carrier row could not be stored form=%08X", resolvedFormId);
-							g_loggedNpcTrainingCarrierStoreFull = true;
-						}
-					}
-				}
-			}
-		}
-
-		if (totals.carrierRecords || !preserveExistingIfNoCarriers)
-		{
-			g_npcTrainingStore.Clear();
-			for (UInt32 i = 0; i < importedStore.Count(); ++i)
-				g_npcTrainingStore.SetLoaded(importedStore.EntryAt(i).formId);
-		}
-
-		g_npcTrainingStore.ClearDirty();
-		_MESSAGE("SpearSkill: embedded NPC Spear training carriers=%u parsed=%u resolved=%u unresolved=%u skipped=%u",
-			totals.carrierRecords,
-			totals.parsedEntries,
-			totals.resolvedEntries,
-			totals.unresolvedEntries,
-			totals.skippedRows);
-	}
-
 	static bool TryGetAuthoredWeaponType(TESObjectWEAP* weapon, SpearSkillShared::WeaponSkillKind* outKind)
 	{
 		if (outKind)
@@ -1967,11 +1105,6 @@ namespace SpearSkill
 		if (index >= kSkillCount)
 			return false;
 
-		// Read through TCS now instead of this mod's own g_state.states[]
-		// (which is no longer kept live -- see AddSkillProgress's own
-		// comment). Falls through to false (native AV) if the interface
-		// isn't available, same as every other g_tcs call site in this
-		// file.
 		if (!g_tcs || !g_tcs->GetSkillLevel)
 			return false;
 
@@ -2254,350 +1387,6 @@ namespace SpearSkill
 		}
 	}
 
-	static void ClearTrainingPolicyState()
-	{
-		std::memset(&g_trainingPolicyState, 0, sizeof(g_trainingPolicyState));
-	}
-
-	static UInt32 GetTrainingSessionLimit()
-	{
-		SettingInfo* setting = nullptr;
-		if (GetGameSetting(const_cast<char*>("iTrainingSkills"), &setting) && setting && setting->i > 0)
-			return static_cast<UInt32>(setting->i);
-
-		return 5;
-	}
-
-	static float GetTrainingCostMultiplier()
-	{
-		SettingInfo* setting = nullptr;
-		if (GetGameSetting(const_cast<char*>("fTrainingCostMult"), &setting) &&
-			setting &&
-			std::isfinite(setting->f) &&
-			setting->f > 0.0f)
-		{
-			return setting->f;
-		}
-
-		return 10.0f;
-	}
-
-	static UInt32 GetPlayerGoldCount()
-	{
-		PlayerCharacter* player = GetPlayer();
-		return player ? static_cast<UInt32>(ActorGetGold()(player)) : 0;
-	}
-
-	static UInt32 GetSpearTrainingCost()
-	{
-		if (!g_tcs || !g_tcs->GetSkillLevel)
-			return 0;
-
-		const float cost = static_cast<float>(g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName)) * GetTrainingCostMultiplier();
-		if (!std::isfinite(cost) || cost <= 0.0f)
-			return 0;
-
-		return static_cast<UInt32>(cost + 0.5f);
-	}
-
-	static void* GetOpenTrainingMenu()
-	{
-		Tile* openTile = MenuGetOpenMenuTile()(0x404);
-		return openTile ? TileGetParentMenu()(openTile) : nullptr;
-	}
-
-	static Actor* GetTrainingMenuTrainer(void* trainingMenu)
-	{
-		return trainingMenu ?
-			*reinterpret_cast<Actor**>(reinterpret_cast<UInt8*>(trainingMenu) + kTrainingMenuTrainerOffset) :
-			nullptr;
-	}
-
-	static UInt32 GetTrainingMenuTrainerLevel(void* trainingMenu)
-	{
-		return trainingMenu ?
-			*reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(trainingMenu) + kTrainingMenuTrainerLevelOffset) :
-			0;
-	}
-
-	static UInt32 GetEffectiveSpearTrainerLevel(TESNPC* trainerBase, UInt32 nativeTrainerLevel, bool* outUsedNpcSidecar)
-	{
-		if (outUsedNpcSidecar)
-			*outUsedNpcSidecar = false;
-
-		UInt32 npcSpearLevel = 0;
-		if (TryGetNpcSpearSkill(trainerBase, &npcSpearLevel) && npcSpearLevel > 0)
-		{
-			if (outUsedNpcSidecar)
-				*outUsedNpcSidecar = true;
-			return npcSpearLevel > kMaxSkillLevel ? kMaxSkillLevel : npcSpearLevel;
-		}
-
-		if (nativeTrainerLevel > 0)
-			return nativeTrainerLevel > kMaxSkillLevel ? kMaxSkillLevel : nativeTrainerLevel;
-
-		// A sidecar-authored Spear trainer can have no usable native skill cap
-		// because Spear is not a TESAIForm/native actor value. Treat that as a
-		// max-level sidecar trainer instead of inheriting vanilla's hard denial.
-		return kMaxSkillLevel;
-	}
-
-	static TESNPC* GetSpearTrainingNpc(Actor* trainer)
-	{
-		if (!trainer)
-			return nullptr;
-
-		TESNPC* npc = AsNpcForm(trainer->baseForm);
-		return npc && g_npcTrainingStore.Has(npc->refID) ? npc : nullptr;
-	}
-
-	static TESNPC* GetSpearTrainingNpcFromAiForm(void* aiForm)
-	{
-		if (!aiForm)
-			return nullptr;
-
-		TESNPC* npc = AsNpcForm(reinterpret_cast<TESForm*>(reinterpret_cast<UInt8*>(aiForm) - kRuntimeActorBaseAiFormOffset));
-		return npc && g_npcTrainingStore.Has(npc->refID) ? npc : nullptr;
-	}
-
-	static bool __fastcall HookDialogueTrainingOffersService(void* aiForm, void*, UInt32 serviceMask)
-	{
-		TESAIFormOffersServiceFn original = DialogueTrainingOffersServiceOriginal();
-		const bool nativeOffersService = original ? original(aiForm, serviceMask) : false;
-		if (nativeOffersService || serviceMask != kTrainingServiceMask)
-			return nativeOffersService;
-
-		return GetSpearTrainingNpcFromAiForm(aiForm) != nullptr;
-	}
-
-	static bool TrainingPolicyCanPurchase(UInt32 trainerLevel, UInt32 cost)
-	{
-		PlayerCharacter* player = GetPlayer();
-		if (!player)
-			return false;
-
-		if (!g_tcs || !g_tcs->GetSkillLevel)
-			return false;
-
-		const UInt32 level = g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
-		if (level >= trainerLevel || level >= kMaxSkillLevel)
-			return false;
-		if (player->trainingSessionsUsed >= GetTrainingSessionLimit())
-			return false;
-
-		return cost <= GetPlayerGoldCount();
-	}
-
-	static void ApplySpearTrainingMenuDisplay(void* trainingMenu)
-	{
-		ClearTrainingPolicyState();
-		if (!trainingMenu)
-			return;
-
-		TESNPC* trainerBase = GetSpearTrainingNpc(GetTrainingMenuTrainer(trainingMenu));
-		if (!trainerBase)
-			return;
-
-		const UInt32 nativeTrainerLevel = GetTrainingMenuTrainerLevel(trainingMenu);
-		bool usedNpcSidecarLevel = false;
-		const UInt32 trainerLevel = GetEffectiveSpearTrainerLevel(trainerBase, nativeTrainerLevel, &usedNpcSidecarLevel);
-		const UInt32 cost = GetSpearTrainingCost();
-		*reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(trainingMenu) + kTrainingMenuTrainerLevelOffset) = trainerLevel;
-		*reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(trainingMenu) + kTrainingMenuCostOffset) = cost;
-
-		g_trainingPolicyState.menu = trainingMenu;
-		g_trainingPolicyState.trainerBase = trainerBase;
-		g_trainingPolicyState.trainerLevel = trainerLevel;
-		g_trainingPolicyState.cost = cost;
-		g_trainingPolicyState.used = true;
-
-		if (Tile* skillName = GetMenuTileAtOffset(trainingMenu, kTrainingMenuSkillNameTileOffset))
-			SetTileString(skillName, kTileValue_string, kSpearSkillDisplayName);
-		if (Tile* icon = GetMenuTileAtOffset(trainingMenu, kTrainingMenuIconTileOffset))
-			SetTileString(icon, kTileValue_filename, GetSidecarSkillIcon(kSpearSkillIndex));
-		if (Tile* costTile = GetMenuTileAtOffset(trainingMenu, kTrainingMenuCostTileOffset))
-		{
-			char costText[64] = {};
-			_snprintf_s(costText, sizeof(costText), _TRUNCATE, "Cost: %u", cost);
-			SetTileString(costTile, kTileValue_string, costText);
-		}
-
-		const bool canPurchase = TrainingPolicyCanPurchase(trainerLevel, cost);
-		if (Tile* acceptTile = GetMenuTileAtOffset(trainingMenu, kTrainingMenuAcceptTileOffset))
-			SetTileFloat(acceptTile, kTileValue_visible, canPurchase ? 2.0f : 1.0f);
-		if (Tile* disabledReason = GetMenuTileAtOffset(trainingMenu, kTrainingMenuDisabledReasonTileOffset))
-		{
-			SetTileFloat(disabledReason, kTileValue_visible, canPurchase ? 1.0f : 2.0f);
-			if (!canPurchase)
-			{
-				const char* reason = cost > GetPlayerGoldCount() ?
-					"You do not have enough gold." :
-					"You cannot train this skill further right now.";
-				SetTileString(disabledReason, kTileValue_string, reason);
-			}
-		}
-
-		_MESSAGE("SpearSkill: mapped trainer %08X to Spear training level=%u trainerLevel=%u nativeTrainerLevel=%u trainerLevelSource=%s cost=%u",
-			trainerBase ? trainerBase->refID : 0,
-			(g_tcs && g_tcs->GetSkillLevel) ? g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName) : 0,
-			trainerLevel,
-			nativeTrainerLevel,
-			usedNpcSidecarLevel ? "npc-sidecar" : (nativeTrainerLevel ? "native-ai" : "sidecar-default"),
-			cost);
-	}
-
-	static void __cdecl ApplySpearTrainingMenuAfterOpen(Tile* menuTile)
-	{
-		void* trainingMenu = menuTile ? TileGetParentMenu()(menuTile) : GetOpenTrainingMenu();
-		ApplySpearTrainingMenuDisplay(trainingMenu);
-	}
-
-	static void RemovePlayerGold(UInt32 cost)
-	{
-		if (!cost)
-			return;
-
-		PlayerCharacter* player = GetPlayer();
-		TESForm* gold = LookupFormByID(kGoldFormId);
-		if (player && gold)
-			player->RemoveItem(gold, nullptr, cost, 0, 0, nullptr, 0, 0, 1, 0);
-	}
-
-	static UInt32 GetSpearSkill()
-	{
-		if (!g_tcs || !g_tcs->GetSkillLevel)
-			return 5;
-		return g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
-	}
-
-	static bool __cdecl HandleSpearTrainingMenuButton(UInt32 buttonId)
-	{
-		void* trainingMenu = GetOpenTrainingMenu();
-		if (!g_trainingPolicyState.used || g_trainingPolicyState.menu != trainingMenu)
-			ApplySpearTrainingMenuDisplay(trainingMenu);
-
-		const bool mapped = g_trainingPolicyState.used && g_trainingPolicyState.menu == trainingMenu;
-		if (!mapped)
-		{
-			_MESSAGE("SpearSkill: TrainingMenu button %u falling through to native handler; no Spear mapping is active",
-				buttonId);
-			return false;
-		}
-
-		_MESSAGE("SpearSkill: mapped TrainingMenu button %u selected openMenu=%p trainerLevel=%u cost=%u",
-			buttonId,
-			trainingMenu,
-			g_trainingPolicyState.trainerLevel,
-			g_trainingPolicyState.cost);
-
-		if (buttonId == kTrainingMenuCloseButton)
-		{
-			_MESSAGE("SpearSkill: closing mapped Spear TrainingMenu via button %u", buttonId);
-			ClearTrainingPolicyState();
-			TrainingMenuClose()();
-			return true;
-		}
-
-		if (buttonId != kTrainingMenuTrainButton)
-		{
-			_MESSAGE("SpearSkill: swallowed mapped Spear TrainingMenu button %u to avoid native/chained trampoline fallthrough",
-				buttonId);
-			return true;
-		}
-
-		if (!TrainingPolicyCanPurchase(g_trainingPolicyState.trainerLevel, g_trainingPolicyState.cost))
-		{
-			_MESSAGE("SpearSkill: Spear training denied level=%u trainerLevel=%u cost=%u sessions=%u",
-				GetSpearSkill(),
-				g_trainingPolicyState.trainerLevel,
-				g_trainingPolicyState.cost,
-				GetPlayer() ? GetPlayer()->trainingSessionsUsed : 0);
-			QueueUIMessage("You cannot train this skill right now.", 0, 1, 2.0f);
-			return true;
-		}
-
-		NormalizeState(kSpearSkillIndex);
-		// Read via GetSpearSkill() (TCS-backed) rather than
-		// g_state.states[] directly -- SetSpearSkillClamped/ModSpearSkill
-		// no longer write to g_state.states[] at all since their own
-		// migration to TCS's SetSkillLevel, so a direct read here would
-		// always see stale, unchanging data and this "did training
-		// actually succeed" check would incorrectly report failure every
-		// single time, regardless of whether the real, TCS-backed level
-		// went up.
-		const UInt32 previousLevel = GetSpearSkill();
-		SetSpearProgress(0.0f);
-		ModSpearSkill(1);
-		if (GetSpearSkill() <= previousLevel)
-		{
-			QueueUIMessage("Training failed.", 0, 1, 2.0f);
-			return true;
-		}
-
-		PlayerCharacter* player = GetPlayer();
-		if (player)
-		{
-			++player->trainingSessionsUsed;
-			++player->miscStats[3];
-		}
-		RemovePlayerGold(g_trainingPolicyState.cost);
-
-		_MESSAGE("SpearSkill: Spear training purchased newLevel=%u cost=%u sessions=%u",
-			GetSpearSkill(),
-			g_trainingPolicyState.cost,
-			player ? player->trainingSessionsUsed : 0);
-
-		ClearTrainingPolicyState();
-		TrainingMenuClose()();
-		return true;
-	}
-
-	static __declspec(naked) void HookTrainingMenuOpen()
-	{
-		__asm
-		{
-			pop ecx
-			pop edx
-			push ecx
-			push edx
-			mov eax, [g_trainingMenuOpenOriginal]
-			test eax, eax
-			jnz callOriginal
-			mov eax, 005DD4B0h
-			callOriginal :
-			push offset afterOriginal
-				jmp eax
-				afterOriginal :
-			pushad
-				push eax
-				call ApplySpearTrainingMenuAfterOpen
-				add esp, 4
-				popad
-				pop edx
-				xchg edx, dword ptr[esp]
-				push edx
-				ret
-		}
-	}
-
-	static __declspec(naked) void HookTrainingMenuButton()
-	{
-		__asm
-		{
-			pushad
-			mov eax, [esp + 36]
-			push eax
-			call HandleSpearTrainingMenuButton
-			add esp, 4
-			test al, al
-			popad
-			jnz handled
-			jmp dword ptr[g_trainingMenuButtonOriginal]
-			handled:
-			ret 8
-		}
-	}
-
 	static void __fastcall HookPlayerModExperience(PlayerCharacter* player, void*, UInt32 actorValue, UInt32 useType, float baseDelta)
 	{
 		if (player == GetPlayer() && (actorValue == kActorVal_Blade || actorValue == kActorVal_Blunt))
@@ -2750,9 +1539,8 @@ namespace SpearSkill
 
 		if (g_pendingWeaponSkillConsumer.playerFacing)
 		{
-			NormalizeState(index);
 			if (outLevel)
-				*outLevel = g_state.states[index].level;
+				*outLevel = (g_tcs && g_tcs->GetSkillLevel) ? g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName) : 5;
 			return true;
 		}
 
@@ -2820,1187 +1608,9 @@ namespace SpearSkill
 		return CallOriginalPowerAttackBonus(skillLevel, attackType);
 	}
 
-	static bool RowIsStatsSkill(Tile* tile, UInt32 index)
-	{
-		if (!tile || GetTileFloat(tile, kStatsRowSyntheticMarkerTrait) != 2.0f)
-			return false;
-
-		const float skillId = GetTileFloat(tile, kStatsRowSyntheticSkillIdTrait);
-		return std::isfinite(skillId) && static_cast<UInt32>(skillId + 0.5f) == kSkills[index].skillId;
-	}
-
-	static bool TryGetForeignSyntheticStatsSkillId(Tile* tile, UInt32& skillId)
-	{
-		skillId = 0xFFFFFFFF;
-		if (!tile || GetTileFloat(tile, kStatsRowSyntheticMarkerTrait) != 2.0f)
-			return false;
-
-		const float rawSkillId = GetTileFloat(tile, kStatsRowSyntheticSkillIdTrait);
-		if (!std::isfinite(rawSkillId))
-			return false;
-
-		skillId = static_cast<UInt32>(rawSkillId + 0.5f);
-		return GetSkillIndexById(skillId) >= kSkillCount;
-	}
-
-	static void UpdateStatsRowTile(UInt32 index, Tile* tile, float order)
-	{
-		if (!tile)
-			return;
-
-		SetTileFloat(tile, kTileValue_user1, 1.0f);
-		SetTileFloat(tile, kTileValue_user2, GetProgressFraction(index));
-		SetTileFloat(tile, kTileValue_user3, static_cast<float>(g_state.states[index].level));
-		SetTileString(tile, kTileValue_user4, kSkills[index].name);
-		SetTileString(tile, kTileValue_user5, GetSidecarSkillRowIcon(index));
-		SetTileFloat(tile, kTileValue_user6, static_cast<float>(kSkills[index].fallbackActorValue));
-		SetTileFloat(tile, kTileValue_user7, static_cast<float>(g_state.states[index].level));
-		SetTileFloat(tile, kTileValue_listindex, order);
-		SetTileFloat(tile, kStatsRowSyntheticSkillIdTrait, static_cast<float>(kSkills[index].skillId));
-		SetTileFloat(tile, kStatsRowSyntheticMarkerTrait, 2.0f);
-	}
-
-	static Tile* CreateStatsRow(void* statsMenu, UInt32 index)
-	{
-		Tile* parent = GetStatsMenuSkillParent(statsMenu);
-		if (!statsMenu || !parent)
-			return nullptr;
-
-		Tile* tile = MenuCreateTileFromTemplate()(statsMenu, parent, kStatsSkillTemplate, 0);
-		if (!tile && !g_loggedStatsRowCreateFailure)
-		{
-			_WARNING("SpearSkill: failed to create StatsMenu row");
-			g_loggedStatsRowCreateFailure = true;
-		}
-		return tile;
-	}
-
-	static Tile* FindStatsRow(void* statsMenu, UInt32 index)
-	{
-		Tile* parent = GetStatsMenuSkillParent(statsMenu);
-		if (!parent)
-			return nullptr;
-
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(parent) + 0x34);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			if (RowIsStatsSkill(tile, index))
-				return tile;
-
-			node = *reinterpret_cast<UInt32*>(node);
-		}
-
-		return nullptr;
-	}
-
-	static void RefreshSidecarSkillDisplay(UInt32 index)
-	{
-		if (index >= kSkillCount || !g_statsMenu)
-			return;
-
-		if (!g_statsRows[index].tile)
-			g_statsRows[index].tile = FindStatsRow(g_statsMenu, index);
-		if (!g_statsRows[index].tile)
-			return;
-
-		const float order = GetTileFloat(g_statsRows[index].tile, kTileValue_listindex);
-		UpdateStatsRowTile(index, g_statsRows[index].tile, order);
-	}
-
-	static UInt32 GetNativeMajorCount(void* statsMenu)
-	{
-		return static_cast<UInt32>(GetTileFloat(GetStatsMenuSummaryTile(statsMenu), kTileValue_user3));
-	}
-
-	static UInt32 CountNativeMajorRows(void* statsMenu, UInt32 summaryMajorCount)
-	{
-		if (!statsMenu || !summaryMajorCount)
-			return 0;
-
-		UInt32 count = 0;
-		for (UInt32 i = 0; i < kNativeSkillCount; ++i)
-		{
-			Tile* row = GetNativeStatsRow(statsMenu, i);
-			if (!row)
-				continue;
-
-			const float order = GetTileFloat(row, kTileValue_listindex);
-			if (std::isfinite(order) && order >= 0.0f && order < static_cast<float>(summaryMajorCount))
-				++count;
-		}
-		return count;
-	}
-
-	static UInt32 GetRawNativeMajorCount(void* statsMenu)
-	{
-		const UInt32 summaryMajorCount = GetNativeMajorCount(statsMenu);
-		const UInt32 nativeMajorCount = CountNativeMajorRows(statsMenu, summaryMajorCount);
-		return nativeMajorCount || !summaryMajorCount ? nativeMajorCount : summaryMajorCount;
-	}
-
-	static void CountForeignSyntheticStatsRows(void* statsMenu, UInt32 currentMajorCount, UInt32& majorCount, UInt32& minorCount)
-	{
-		majorCount = 0;
-		minorCount = 0;
-		Tile* parent = GetStatsMenuSkillParent(statsMenu);
-		if (!parent)
-			return;
-
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(parent) + 0x34);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			UInt32 skillId = 0;
-			if (TryGetForeignSyntheticStatsSkillId(tile, skillId))
-			{
-				const float order = GetTileFloat(tile, kTileValue_listindex);
-				if (std::isfinite(order) && order >= 0.0f && order < static_cast<float>(currentMajorCount))
-					++majorCount;
-				else
-					++minorCount;
-			}
-
-			node = *reinterpret_cast<UInt32*>(node);
-		}
-	}
-
-	static void RestoreStatsMenuNativeMajorSummary(void* statsMenu)
-	{
-		Tile* summary = GetStatsMenuSummaryTile(statsMenu);
-		if (!summary || !HasNativeStatsRows(statsMenu))
-			return;
-
-		const UInt32 summaryMajorCount = GetNativeMajorCount(statsMenu);
-		const UInt32 nativeMajorCount = CountNativeMajorRows(statsMenu, summaryMajorCount);
-		if (nativeMajorCount && nativeMajorCount != summaryMajorCount)
-			SetTileFloat(summary, kTileValue_user3, static_cast<float>(nativeMajorCount));
-	}
-
-	static bool NativeStatsRowIsHiddenBySidecar(Tile* row)
-	{
-		if (!row)
-			return false;
-
-		return GetTileFloat(row, kTileValue_listclip) == 2.0f &&
-			GetTileFloat(row, kTileValue_visible) != 2.0f &&
-			GetTileFloat(row, kTileValue_heightRaw) <= 1.0f;
-	}
-
-	static bool NativeStatsOrderIsMajor(float order, UInt32 rawNativeMajorCount)
-	{
-		return std::isfinite(order) &&
-			order >= 0.0f &&
-			order < static_cast<float>(rawNativeMajorCount);
-	}
-
-	static float GetNativeMiscStatsOrderStart(UInt32 rawNativeMajorCount)
-	{
-		return rawNativeMajorCount ? static_cast<float>(rawNativeMajorCount + 1) : 0.0f;
-	}
-
-	static UInt32 CountVisibleNativeMajorRows(void* statsMenu, UInt32 rawNativeMajorCount)
-	{
-		if (!statsMenu || !rawNativeMajorCount)
-			return 0;
-
-		UInt32 count = 0;
-		for (UInt32 i = 0; i < kNativeSkillCount; ++i)
-		{
-			Tile* row = GetNativeStatsRow(statsMenu, i);
-			if (!row || NativeStatsRowIsHiddenBySidecar(row))
-				continue;
-
-			if (NativeStatsOrderIsMajor(GetTileFloat(row, kTileValue_listindex), rawNativeMajorCount))
-				++count;
-		}
-		return count;
-	}
-
-	static UInt32 GetSyntheticMiscStatsOrderBase(UInt32 nativeMajorCount, UInt32 syntheticMajorCount);
-
-	static void RepairVisibleNativeStatsOrdering(void* statsMenu, UInt32 rawNativeMajorCount, UInt32 visibleNativeMajorCount, UInt32 foreignSyntheticMajorCount, UInt32 syntheticMajorCount, UInt32 foreignSyntheticMinorCount, UInt32 syntheticMinorCount)
-	{
-		if (!statsMenu)
-			return;
-
-		UInt32 nativeMajorIndex = 0;
-		UInt32 nativeMiscIndex = 0;
-		const float rawNativeMiscStart = GetNativeMiscStatsOrderStart(rawNativeMajorCount);
-		const UInt32 nativeMiscBase =
-			GetSyntheticMiscStatsOrderBase(visibleNativeMajorCount, foreignSyntheticMajorCount + syntheticMajorCount) +
-			foreignSyntheticMinorCount +
-			syntheticMinorCount;
-
-		for (UInt32 i = 0; i < kNativeSkillCount; ++i)
-		{
-			Tile* row = GetNativeStatsRow(statsMenu, i);
-			if (!row || NativeStatsRowIsHiddenBySidecar(row))
-				continue;
-
-			const float order = GetTileFloat(row, kTileValue_listindex);
-			if (!std::isfinite(order))
-				continue;
-
-			float repairedOrder = order;
-			if (NativeStatsOrderIsMajor(order, rawNativeMajorCount))
-				repairedOrder = static_cast<float>(nativeMajorIndex++);
-			else if (order >= rawNativeMiscStart)
-				repairedOrder = static_cast<float>(nativeMiscBase + nativeMiscIndex++);
-
-			if (repairedOrder != order)
-				SetTileFloat(row, kTileValue_listindex, repairedOrder);
-		}
-	}
-
-	static void RepairForeignSyntheticStatsOrdering(void* statsMenu, UInt32 currentMajorCount, UInt32 visibleNativeMajorCount, UInt32 foreignSyntheticMajorCount, UInt32 syntheticMajorCount, UInt32 foreignSyntheticMinorCount)
-	{
-		Tile* parent = GetStatsMenuSkillParent(statsMenu);
-		if (!parent)
-			return;
-
-		UInt32 foreignMajorIndex = 0;
-		UInt32 foreignMinorIndex = 0;
-		const UInt32 miscBase = GetSyntheticMiscStatsOrderBase(visibleNativeMajorCount, foreignSyntheticMajorCount + syntheticMajorCount);
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(parent) + 0x34);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			UInt32 skillId = 0;
-			if (TryGetForeignSyntheticStatsSkillId(tile, skillId))
-			{
-				const float order = GetTileFloat(tile, kTileValue_listindex);
-				if (std::isfinite(order))
-				{
-					float repairedOrder = order;
-					if (foreignMajorIndex < foreignSyntheticMajorCount &&
-						order >= 0.0f &&
-						order < static_cast<float>(currentMajorCount))
-					{
-						repairedOrder = static_cast<float>(visibleNativeMajorCount + foreignMajorIndex++);
-					}
-					else if (foreignMinorIndex < foreignSyntheticMinorCount)
-					{
-						repairedOrder = static_cast<float>(miscBase + foreignMinorIndex++);
-					}
-
-					if (repairedOrder != order)
-						SetTileFloat(tile, kTileValue_listindex, repairedOrder);
-				}
-			}
-
-			node = *reinterpret_cast<UInt32*>(node);
-		}
-	}
-
-	static UInt32 CountMajorSidecars()
-	{
-		UInt32 count = 0;
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			if (IsEffectiveMajor(i))
-				++count;
-		}
-		return count;
-	}
-
-	static UInt32 GetSyntheticMiscStatsOrderBase(UInt32 nativeMajorCount, UInt32 syntheticMajorCount)
-	{
-		const bool hasMajorSection = (nativeMajorCount + syntheticMajorCount) > 0;
-		return nativeMajorCount + syntheticMajorCount + (hasMajorSection ? 1 : 0);
-	}
-
-	static void SyncStatsMenuRows(void* statsMenu, bool repairOrdering)
-	{
-		if (!statsMenu || !HasNativeStatsRows(statsMenu))
-			return;
-
-		if (g_statsMenu != statsMenu)
-		{
-			g_statsMenu = statsMenu;
-			std::memset(g_statsRows, 0, sizeof(g_statsRows));
-			g_loggedStatsRowCreateFailure = false;
-		}
-
-		const UInt32 rawNativeMajorCount = repairOrdering ? GetRawNativeMajorCount(statsMenu) : 0;
-		const UInt32 currentMajorCount = repairOrdering ? GetNativeMajorCount(statsMenu) : 0;
-		UInt32 foreignSyntheticMajorCount = 0;
-		UInt32 foreignSyntheticMinorCount = 0;
-		if (repairOrdering)
-			CountForeignSyntheticStatsRows(statsMenu, currentMajorCount, foreignSyntheticMajorCount, foreignSyntheticMinorCount);
-		const UInt32 visibleNativeMajorCount = repairOrdering ? CountVisibleNativeMajorRows(statsMenu, rawNativeMajorCount) : 0;
-		const UInt32 syntheticMajorCount = repairOrdering ? CountMajorSidecars() : 0;
-		const UInt32 syntheticMinorCount = repairOrdering ? kSkillCount - syntheticMajorCount : 0;
-		UInt32 syntheticMajorIndex = 0;
-		UInt32 syntheticMiscIndex = 0;
-
-		if (repairOrdering)
-		{
-			RepairVisibleNativeStatsOrdering(
-				statsMenu,
-				rawNativeMajorCount,
-				visibleNativeMajorCount,
-				foreignSyntheticMajorCount,
-				syntheticMajorCount,
-				foreignSyntheticMinorCount,
-				syntheticMinorCount);
-			RepairForeignSyntheticStatsOrdering(
-				statsMenu,
-				currentMajorCount,
-				visibleNativeMajorCount,
-				foreignSyntheticMajorCount,
-				syntheticMajorCount,
-				foreignSyntheticMinorCount);
-		}
-		if (repairOrdering)
-		{
-			if (Tile* summary = GetStatsMenuSummaryTile(statsMenu))
-				SetTileFloat(summary, kTileValue_user3, static_cast<float>(visibleNativeMajorCount + syntheticMajorCount + foreignSyntheticMajorCount));
-		}
-
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			if (!g_statsRows[i].tile)
-				g_statsRows[i].tile = FindStatsRow(statsMenu, i);
-			if (!g_statsRows[i].tile)
-				g_statsRows[i].tile = CreateStatsRow(statsMenu, i);
-
-			float order = g_statsRows[i].tile ? GetTileFloat(g_statsRows[i].tile, kTileValue_listindex) : 0.0f;
-			if (repairOrdering)
-			{
-				if (IsEffectiveMajor(i))
-				{
-					order = static_cast<float>(visibleNativeMajorCount + foreignSyntheticMajorCount + syntheticMajorIndex++);
-				}
-				else
-					order = static_cast<float>(GetSyntheticMiscStatsOrderBase(visibleNativeMajorCount, foreignSyntheticMajorCount + syntheticMajorCount) + foreignSyntheticMinorCount + syntheticMiscIndex++);
-			}
-
-			UpdateStatsRowTile(i, g_statsRows[i].tile, order);
-		}
-
-		if (repairOrdering)
-			g_statsOrderingDirty = false;
-	}
-
-	static void __fastcall HookStatsMenuCreateRows(void* statsMenu, void*)
-	{
-		std::memset(g_statsRows, 0, sizeof(g_statsRows));
-		g_statsMenu = statsMenu;
-		g_insideStatsMenuCreateRows = true;
-		StatsMenuCreateRowsOriginal()(statsMenu);
-		g_insideStatsMenuCreateRows = false;
-		SyncStatsMenuRows(statsMenu, true);
-	}
-
-	static void __fastcall HookStatsMenuRefresh(void* statsMenu, void*, UInt32 actorValue)
-	{
-		if (actorValue == 0xFFFFFFFF)
-			RestoreStatsMenuNativeMajorSummary(statsMenu);
-		StatsMenuRefreshOriginal()(statsMenu, actorValue);
-		if (g_insideStatsMenuCreateRows)
-			return;
-
-		bool repairOrdering = actorValue == 0xFFFFFFFF;
-		if (g_statsOrderingDirty && !repairOrdering)
-		{
-			RestoreStatsMenuNativeMajorSummary(statsMenu);
-			StatsMenuRefreshOriginal()(statsMenu, 0xFFFFFFFF);
-			repairOrdering = true;
-		}
-		SyncStatsMenuRows(statsMenu, repairOrdering);
-	}
-
-	static void __stdcall AddStatsMenuMasteryCounts(void*, UInt32* masteryCounts)
-	{
-		if (!masteryCounts)
-			return;
-
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			const UInt32 mastery = CalcMasteryFromSkill()(static_cast<SInt32>(g_state.states[i].level));
-			if (mastery < kStatsMenuMasteryRankCount)
-				++masteryCounts[mastery];
-		}
-	}
-
-	static __declspec(naked) void HookStatsMenuMasteryCounts()
-	{
-		__asm
-		{
-			lea eax, [esp + 30h]
-			push eax
-			push esi
-			call AddStatsMenuMasteryCounts
-			mov dword ptr[esp + 14h], 5
-			xor ebx, ebx
-			mov eax, 005DAAB2h
-			jmp eax
-		}
-	}
-
-	static void ComposeSkillDescriptionText(UInt32 index, char* buffer, UInt32 bufferSize)
-	{
-		if (!buffer || !bufferSize)
-			return;
-
-		if (index >= kSkillCount)
-		{
-			buffer[0] = '\0';
-			return;
-		}
-
-		NormalizeState(index);
-		const SkillState& state = g_state.states[index];
-		_snprintf_s(buffer, bufferSize, _TRUNCATE,
-			"%s\n\nGoverning Attribute: %s\n\nLevel: %s",
-			kSkills[index].description,
-			GetSafeActorValueName(kSkills[index].governingAttributeAV),
-			GetSafeMasteryName(state.level));
-	}
-
-	static void ComposeSkillDetailText(UInt32 index, char* buffer, UInt32 bufferSize)
-	{
-		ComposeSkillDescriptionText(index, buffer, bufferSize);
-	}
-
-	static void ComposeClassPickerSkillDetailText(UInt32 index, char* buffer, UInt32 bufferSize)
-	{
-		ComposeSkillDescriptionText(index, buffer, bufferSize);
-	}
-
-	static UInt32 FindStatsSkillIndexByTile(Tile* tile)
-	{
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			if (RowIsStatsSkill(tile, i))
-				return i;
-		}
-		return 0xFFFFFFFF;
-	}
-
-	static void UpdateStatsFocusTile(void* statsMenu, Tile* selectedTile)
-	{
-		Tile* focus = GetStatsMenuFocusTile(statsMenu);
-		if (!focus || !selectedTile)
-			return;
-
-		if (GetTileFloat(selectedTile, kTileValue_listclip) == 2.0f)
-		{
-			SetTileFloat(focus, kTileValue_visible, 1.0f);
-			return;
-		}
-
-		const float width = GetTileFloat(selectedTile, kTileValue_width) - kStatsFocusSizeInset;
-		const float height = GetTileFloat(selectedTile, kTileValue_height) - kStatsFocusSizeInset;
-		SetTileFloat(focus, kTileValue_depth, static_cast<float>(TileGetGlobalDepth()(selectedTile)) - kStatsFocusDepthInset);
-		SetTileFloat(focus, kTileValue_width, width > 0.0f ? width : 0.0f);
-		SetTileFloat(focus, kTileValue_height, height > 0.0f ? height : 0.0f);
-		SetTileFloat(focus, kTileValue_x, static_cast<float>(TileGetGlobalX()(selectedTile)));
-		SetTileFloat(focus, kTileValue_y, static_cast<float>(TileGetGlobalY()(selectedTile)) + kStatsFocusYOffset);
-		SetTileFloat(focus, kTileValue_visible, 2.0f);
-	}
-
-	static bool __stdcall HandleStatsMenuDetails(void* statsMenu, UInt32 buttonId, Tile* selectedTile)
-	{
-		if (buttonId != 0x22)
-			return false;
-
-		const UInt32 index = FindStatsSkillIndexByTile(selectedTile);
-		if (index >= kSkillCount)
-			return false;
-
-		Tile* detailTile = GetStatsMenuDetailTile(statsMenu);
-		if (!detailTile)
-			return false;
-
-		UpdateStatsFocusTile(statsMenu, selectedTile);
-		char detailText[768] = {};
-		ComposeSkillDetailText(index, detailText, sizeof(detailText));
-		SetTileString(detailTile, kTileValue_user2, GetSidecarSkillIcon(index));
-		SetTileString(detailTile, kTileValue_user3, detailText);
-		SetTileFloat(detailTile, kTileValue_user5, -1.0f);
-		SetTileFloat(detailTile, kTileValue_user4, 2.0f);
-		TileAnimateTrait()(detailTile, kTileValue_user0, GetTileFloat(detailTile, kTileValue_user0), 1.0f, GetTileFloat(detailTile, kTileValue_user1));
-		return true;
-	}
-
-	static __declspec(naked) void HookStatsMenuDetails()
-	{
-		__asm
-		{
-			pushad
-			mov eax, [esp + 40]
-			push eax
-			mov eax, [esp + 40]
-			push eax
-			push ecx
-			call HandleStatsMenuDetails
-			test al, al
-			popad
-			jnz handled
-			jmp dword ptr[g_statsMenuDetailsOriginal]
-			handled:
-			ret 8
-		}
-	}
-
-	static Tile* GetSkillsMenuListTile(void* skillsMenu)
-	{
-		return GetMenuTileAtOffset(skillsMenu, kSkillsMenuListTileOffset);
-	}
-
-	static Tile* GetSkillsMenuAcceptButton(void* skillsMenu)
-	{
-		return GetMenuTileAtOffset(skillsMenu, kSkillsMenuAcceptButtonOffset);
-	}
-
-	static Tile* GetSkillsMenuTile(void* skillsMenu)
-	{
-		return GetMenuTileAtOffset(skillsMenu, kSkillsMenuTileOffset);
-	}
-
-	static void* GetSkillsMenuClassMenu(void* skillsMenu)
-	{
-		return skillsMenu ? *reinterpret_cast<void**>(reinterpret_cast<UInt8*>(skillsMenu) + kSkillsMenuClassMenuOffset) : nullptr;
-	}
-
-	static UInt32 GetSkillsMenuMode(void* skillsMenu)
-	{
-		return skillsMenu ? *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(skillsMenu) + kSkillsMenuModeOffset) : 0xFFFFFFFF;
-	}
-
-	static UInt32 GetSkillsMenuCurrentValue(void* skillsMenu)
-	{
-		return skillsMenu ? *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(skillsMenu) + kSkillsMenuCurrentValueOffset) : 0;
-	}
-
-	static void SetSkillsMenuSelectionCap(void* skillsMenu, UInt32 cap)
-	{
-		if (skillsMenu)
-			*reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(skillsMenu) + kSkillsMenuSelectionCapOffset) = cap;
-	}
-
-	static UInt32* GetClassMenuNativeSkillArray(void* classMenu)
-	{
-		return classMenu ? reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(classMenu) + kClassMenuSelectedSkillsOffset) : nullptr;
-	}
-
-	static bool ClassMenuHasNativeMajor(void* classMenu, UInt32 actorValue)
-	{
-		UInt32* nativeSkills = GetClassMenuNativeSkillArray(classMenu);
-		if (!nativeSkills)
-			return false;
-
-		for (UInt32 i = 0; i < kNativeClassMajorCount; ++i)
-		{
-			if (nativeSkills[i] == actorValue)
-				return true;
-		}
-		return false;
-	}
-
-	static bool SidecarDisplayedByLegacyNativeSlot(void* classMenu, UInt32 index)
-	{
-		return false;
-	}
-
-	static Tile* GetClassMenuTile(void* classMenu)
-	{
-		return GetMenuTileAtOffset(classMenu, kClassMenuTileOffset);
-	}
-
-	static void* GetClassMenuSelectedClass(void* classMenu)
-	{
-		return classMenu ? *reinterpret_cast<void**>(reinterpret_cast<UInt8*>(classMenu) + kClassMenuSelectedClassOffset) : nullptr;
-	}
-
-	static void* GetClassMenuCustomClass(void* classMenu)
-	{
-		return classMenu ? *reinterpret_cast<void**>(reinterpret_cast<UInt8*>(classMenu) + kClassMenuCustomClassOffset) : nullptr;
-	}
-
 	static UInt32 GetFormId(void* form)
 	{
 		return form ? *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(form) + kTESFormFormIdOffset) : 0;
-	}
-
-	static void SetClassMenuCurrentPickerValue(void* classMenu, UInt32 mode, UInt32 value)
-	{
-		if (!classMenu || mode > 2)
-			return;
-
-		*reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(classMenu) + kClassMenuCurrentPickerValueOffset + mode * sizeof(UInt32)) = value;
-	}
-
-	static bool IsClassSkillPicker(void* skillsMenu)
-	{
-		return GetSkillsMenuClassMenu(skillsMenu) != nullptr && GetSkillsMenuMode(skillsMenu) == 0;
-	}
-
-	static bool RowIsSelected(Tile* tile)
-	{
-		return GetTileFloat(tile, kPickerRowSelectedTrait) == 2.0f;
-	}
-
-	static UInt32 GetPickerRowSyntheticSkillId(Tile* tile)
-	{
-		if (!tile || GetTileFloat(tile, kPickerSyntheticMarkerTrait) != 2.0f)
-			return 0xFFFFFFFF;
-
-		const float skillId = GetTileFloat(tile, kPickerSyntheticSkillIdTrait);
-		return std::isfinite(skillId) ? static_cast<UInt32>(skillId + 0.5f) : 0xFFFFFFFF;
-	}
-
-	static UInt32 FindPickerSkillIndexByTile(Tile* tile)
-	{
-		return GetSkillIndexById(GetPickerRowSyntheticSkillId(tile));
-	}
-
-	static bool TryGetForeignSyntheticPickerSkillId(Tile* tile, UInt32& skillId)
-	{
-		skillId = 0xFFFFFFFF;
-		if (!tile || GetTileFloat(tile, kPickerSyntheticMarkerTrait) != 2.0f)
-			return false;
-
-		const float rawSkillId = GetTileFloat(tile, kPickerSyntheticSkillIdTrait);
-		if (!std::isfinite(rawSkillId))
-			return false;
-
-		skillId = static_cast<UInt32>(rawSkillId + 0.5f);
-		return GetSkillIndexById(skillId) >= kSkillCount;
-	}
-
-	static UInt32 GetPickerRowActorValue(Tile* tile)
-	{
-		if (!tile)
-			return 0xFFFFFFFF;
-
-		const float actorValue = GetTileFloat(tile, kPickerRowValueTrait);
-		return std::isfinite(actorValue) ? static_cast<UInt32>(actorValue + 0.5f) : 0xFFFFFFFF;
-	}
-
-	static bool IsNativePickerSkillRow(Tile* tile, UInt32& actorValue)
-	{
-		if (!tile || GetTileFloat(tile, kPickerSyntheticMarkerTrait) == 2.0f)
-			return false;
-
-		actorValue = GetPickerRowActorValue(tile);
-		return actorValue >= kFirstNativeSkillAV && actorValue <= kLastNativeSkillAV;
-	}
-
-	static bool NativePickerRowIsHiddenBySidecar(Tile* tile)
-	{
-		if (!tile)
-			return false;
-
-		return GetTileFloat(tile, kTileValue_listclip) == 2.0f &&
-			GetTileFloat(tile, kTileValue_visible) != 2.0f &&
-			GetTileFloat(tile, kTileValue_heightRaw) <= 1.0f;
-	}
-
-	static float GetSidecarPickerOrder(UInt32 visibleNativeCount, UInt32 foreignSyntheticCount, UInt32 index)
-	{
-		return static_cast<float>(visibleNativeCount + foreignSyntheticCount + index);
-	}
-
-	static bool HasPickerRow(void* skillsMenu, UInt32 index)
-	{
-		Tile* listTile = GetSkillsMenuListTile(skillsMenu);
-		if (!listTile)
-			return false;
-
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(listTile) + 0x34);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			if (FindPickerSkillIndexByTile(tile) == index)
-				return true;
-
-			node = *reinterpret_cast<UInt32*>(node);
-		}
-		return false;
-	}
-
-	static void HideNativeBladeClassPickerRows(void* skillsMenu)
-	{
-	}
-
-	static UInt32 CountForeignSyntheticPickerRows(void* skillsMenu)
-	{
-		Tile* listTile = GetSkillsMenuListTile(skillsMenu);
-		if (!listTile)
-			return 0;
-
-		UInt32 count = 0;
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(listTile) + 0x34);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			UInt32 skillId = 0;
-			if (TryGetForeignSyntheticPickerSkillId(tile, skillId))
-				++count;
-
-			node = *reinterpret_cast<UInt32*>(node);
-		}
-		return count;
-	}
-
-	static void RepairClassPickerRowOrdering(void* skillsMenu)
-	{
-		Tile* listTile = GetSkillsMenuListTile(skillsMenu);
-		if (!listTile)
-			return;
-
-		// Vanilla name-sorts this picker before row creation; compact the live ordered list instead of rebuilding order from actor-value IDs.
-		Tile* visibleNativeRows[kNativeSkillCount] = {};
-		UInt32 visibleNativeCount = 0;
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(listTile) + 0x38);
-		while (node && visibleNativeCount < kNativeSkillCount)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			UInt32 actorValue = 0xFFFFFFFF;
-			if (IsNativePickerSkillRow(tile, actorValue) && !NativePickerRowIsHiddenBySidecar(tile))
-				visibleNativeRows[visibleNativeCount++] = tile;
-
-			node = *reinterpret_cast<UInt32*>(node + 4);
-		}
-
-		for (UInt32 i = 0; i < visibleNativeCount; ++i)
-			SetTileFloat(visibleNativeRows[i], kTileValue_listindex, static_cast<float>(i));
-	}
-
-	static void RepairForeignSyntheticPickerOrdering(void* skillsMenu, UInt32 visibleNativeCount)
-	{
-		Tile* listTile = GetSkillsMenuListTile(skillsMenu);
-		if (!listTile)
-			return;
-
-		UInt32 foreignIndex = 0;
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(listTile) + 0x38);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			UInt32 skillId = 0;
-			if (TryGetForeignSyntheticPickerSkillId(tile, skillId))
-				SetTileFloat(tile, kTileValue_listindex, static_cast<float>(visibleNativeCount + foreignIndex++));
-
-			node = *reinterpret_cast<UInt32*>(node + 4);
-		}
-	}
-
-	static UInt32 CountVisibleNativePickerRows(void* skillsMenu)
-	{
-		Tile* listTile = GetSkillsMenuListTile(skillsMenu);
-		if (!listTile)
-			return kNativeSkillCount - 1;
-
-		UInt32 count = 0;
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(listTile) + 0x34);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			UInt32 actorValue = 0xFFFFFFFF;
-			if (IsNativePickerSkillRow(tile, actorValue) && !NativePickerRowIsHiddenBySidecar(tile))
-				++count;
-
-			node = *reinterpret_cast<UInt32*>(node);
-		}
-		return count ? count : kNativeSkillCount;
-	}
-
-	static bool GetStagedOrSavedSelection(void* classMenu, UInt32 index)
-	{
-		if (g_stagedUsed && g_stagedClassMenu == classMenu)
-			return g_stagedSelections[index];
-
-		return g_state.states[index].major != 0;
-	}
-
-	static void UpdatePickerRow(void* skillsMenu, UInt32 index, UInt32 visibleNativeCount, UInt32 foreignSyntheticCount)
-	{
-		Tile* row = g_pickerRows[index].tile;
-		if (!row)
-			return;
-
-		const bool selected = GetStagedOrSavedSelection(GetSkillsMenuClassMenu(skillsMenu), index);
-		SetTileFloat(row, kPickerRowSelectedTrait, selected ? 2.0f : 1.0f);
-		SetTileFloat(row, kPickerRowValueTrait, kSyntheticPickerNativeValueSentinel);
-		SetTileFloat(row, kPickerSyntheticSkillIdTrait, static_cast<float>(kSkills[index].skillId));
-		SetTileFloat(row, kPickerSyntheticMarkerTrait, 2.0f);
-		SetTileFloat(row, kTileValue_listindex, GetSidecarPickerOrder(visibleNativeCount, foreignSyntheticCount, index));
-	}
-
-	static UInt32 CountSelectedPickerRows(void* skillsMenu)
-	{
-		Tile* listTile = GetSkillsMenuListTile(skillsMenu);
-		if (!listTile)
-			return 0;
-
-		UInt32 count = 0;
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(listTile) + 0x34);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			if (tile && !NativePickerRowIsHiddenBySidecar(tile) && RowIsSelected(tile))
-				++count;
-
-			node = *reinterpret_cast<UInt32*>(node);
-		}
-		return count;
-	}
-
-	static void UpdateClassSkillPickerAcceptButton(void* skillsMenu)
-	{
-		Tile* acceptButton = GetSkillsMenuAcceptButton(skillsMenu);
-		if (!acceptButton)
-			return;
-
-		const float enabled = CountSelectedPickerRows(skillsMenu) == kNativeClassMajorCount ? 2.0f : 1.0f;
-		SetTileFloat(acceptButton, kTileValue_user1, enabled);
-		SetTileFloat(acceptButton, kTileValue_heightRaw, enabled);
-	}
-
-	static void SyncClassSkillPickerRows(void* skillsMenu)
-	{
-		if (!IsClassSkillPicker(skillsMenu))
-			return;
-
-		if (g_classPickerSkillsMenu != skillsMenu)
-		{
-			g_classPickerSkillsMenu = skillsMenu;
-			std::memset(g_pickerRows, 0, sizeof(g_pickerRows));
-		}
-
-		HideNativeBladeClassPickerRows(skillsMenu);
-		RepairClassPickerRowOrdering(skillsMenu);
-		const UInt32 visibleNativeCount = CountVisibleNativePickerRows(skillsMenu);
-		const UInt32 foreignSyntheticCount = CountForeignSyntheticPickerRows(skillsMenu);
-		RepairForeignSyntheticPickerOrdering(skillsMenu, visibleNativeCount);
-		SetSkillsMenuSelectionCap(skillsMenu, kNativeClassMajorCount);
-
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			if (!g_pickerRows[i].tile && !HasPickerRow(skillsMenu, i))
-				g_pickerRows[i].tile = SkillsMenuCreateSkillRow()(skillsMenu, kSkills[i].name, kSkills[i].fallbackActorValue);
-			UpdatePickerRow(skillsMenu, i, visibleNativeCount, foreignSyntheticCount);
-		}
-
-		UpdateClassSkillPickerAcceptButton(skillsMenu);
-	}
-
-	static void __fastcall HookSkillsMenuPreselect(void* skillsMenu, void*)
-	{
-		SkillsMenuPreselectOriginal()(skillsMenu);
-		SyncClassSkillPickerRows(skillsMenu);
-	}
-
-	static bool __stdcall HandleSkillsMenuDetails(void* skillsMenu, UInt32)
-	{
-		if (!IsClassSkillPicker(skillsMenu))
-			return false;
-
-		Tile* selectedTile = *reinterpret_cast<Tile**>(reinterpret_cast<UInt8*>(skillsMenu) + kSkillsMenuSelectedTileOffset);
-		const UInt32 index = FindPickerSkillIndexByTile(selectedTile);
-		if (index >= kSkillCount)
-			return false;
-
-		Tile* detailTile = GetSkillsMenuTile(skillsMenu);
-		if (!detailTile)
-			return false;
-
-		char detailText[768] = {};
-		ComposeClassPickerSkillDetailText(index, detailText, sizeof(detailText));
-		SetTileString(detailTile, kTileValue_user1, detailText);
-		SetTileString(detailTile, kTileValue_user2, GetSidecarSkillIcon(index));
-		return true;
-	}
-
-	static __declspec(naked) void HookSkillsMenuDetails()
-	{
-		__asm
-		{
-			pushad
-			mov eax, [esp + 36]
-			push eax
-			push ecx
-			call HandleSkillsMenuDetails
-			test al, al
-			popad
-			jnz handled
-			jmp dword ptr[g_skillsMenuDetailsOriginal]
-			handled:
-			ret 4
-		}
-	}
-
-	static void __fastcall HookSkillsMenuUpdateAccept(void* skillsMenu, void*)
-	{
-		if (IsClassSkillPicker(skillsMenu))
-		{
-			UpdateClassSkillPickerAcceptButton(skillsMenu);
-			return;
-		}
-
-		SkillsMenuUpdateAcceptOriginal()(skillsMenu);
-	}
-
-	static void CollectSelectedClassPickerRows(
-		void* skillsMenu,
-		UInt32* nativeActorValues,
-		UInt32& nativeCount,
-		bool* sidecarSelected,
-		UInt32& foreignSyntheticSelectedCount,
-		UInt32* selectedSyntheticSkillIds,
-		UInt32& selectedSyntheticSkillCount)
-	{
-		nativeCount = 0;
-		foreignSyntheticSelectedCount = 0;
-		selectedSyntheticSkillCount = 0;
-		std::memset(sidecarSelected, 0, sizeof(bool) * kSkillCount);
-		Tile* listTile = GetSkillsMenuListTile(skillsMenu);
-		if (!listTile)
-			return;
-
-		UInt32 node = *reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(listTile) + 0x38);
-		while (node)
-		{
-			Tile* tile = *reinterpret_cast<Tile**>(node + 8);
-			if (tile && !NativePickerRowIsHiddenBySidecar(tile) && RowIsSelected(tile))
-			{
-				const UInt32 sidecarIndex = FindPickerSkillIndexByTile(tile);
-				if (sidecarIndex < kSkillCount)
-				{
-					sidecarSelected[sidecarIndex] = true;
-					AddUniqueUInt32(selectedSyntheticSkillIds, selectedSyntheticSkillCount,
-						kNativeClassMajorCount, kSkills[sidecarIndex].skillId);
-				}
-				else
-				{
-					UInt32 foreignSkillId = 0;
-					if (TryGetForeignSyntheticPickerSkillId(tile, foreignSkillId))
-					{
-						++foreignSyntheticSelectedCount;
-						AddUniqueUInt32(selectedSyntheticSkillIds, selectedSyntheticSkillCount,
-							kNativeClassMajorCount, foreignSkillId);
-					}
-					else
-					{
-						const UInt32 actorValue = static_cast<UInt32>(GetTileFloat(tile, kPickerRowValueTrait) + 0.5f);
-						if (IsVisibleNativeSkillActorValue(actorValue))
-							AddUniqueUInt32(nativeActorValues, nativeCount, kNativeClassMajorCount, actorValue);
-					}
-				}
-			}
-
-			node = *reinterpret_cast<UInt32*>(node + 4);
-		}
-	}
-
-	static void FillNativeClassMajorArray(void* classMenu, const UInt32* selectedActorValues, UInt32 selectedCount)
-	{
-		UInt32* nativeSkills = GetClassMenuNativeSkillArray(classMenu);
-		if (!nativeSkills)
-			return;
-
-		UInt32 repaired[kNativeClassMajorCount] = {};
-		UInt32 repairedCount = 0;
-		for (UInt32 i = 0; i < selectedCount; ++i)
-		{
-			if (IsVisibleNativeSkillActorValue(selectedActorValues[i]))
-				AddUniqueUInt32(repaired, repairedCount, kNativeClassMajorCount, selectedActorValues[i]);
-		}
-		for (UInt32 i = 0; i < kNativeClassMajorCount; ++i)
-		{
-			if (IsVisibleNativeSkillActorValue(nativeSkills[i]))
-				AddUniqueUInt32(repaired, repairedCount, kNativeClassMajorCount, nativeSkills[i]);
-		}
-		for (UInt32 actorValue = kFirstNativeSkillAV; actorValue <= kLastNativeSkillAV && repairedCount < kNativeClassMajorCount; ++actorValue)
-		{
-			if (IsVisibleNativeSkillActorValue(actorValue))
-				AddUniqueUInt32(repaired, repairedCount, kNativeClassMajorCount, actorValue);
-		}
-		for (UInt32 i = 0; i < kNativeClassMajorCount; ++i)
-			nativeSkills[i] = repaired[i];
-	}
-
-	static bool IsClassSkillPickerAcceptEvent(void* skillsMenu, UInt32 buttonId)
-	{
-		if (buttonId == 4 || buttonId == 5 || buttonId == 6)
-			return true;
-
-		return buttonId == 7 && GetTileFloat(GetSkillsMenuTile(skillsMenu), kSkillsMenuForwardEnabledTrait) == 2.0f;
-	}
-
-	static void AdvanceClassMenuAfterSkillPicker(void* classMenu, void* skillsMenu, UInt32 buttonId)
-	{
-		UInt32* step = reinterpret_cast<UInt32*>(reinterpret_cast<UInt8*>(classMenu) + kClassMenuStepOffset);
-		const bool increment = buttonId == 4 || (buttonId == 7 && GetTileFloat(GetSkillsMenuTile(skillsMenu), kSkillsMenuForwardEnabledTrait) == 2.0f);
-		if (increment)
-			++*step;
-		else
-		{
-			--*step;
-			if (*step == 0)
-				ClassMenuStepRefresh()(classMenu);
-		}
-		SetClassMenuCurrentPickerValue(classMenu, 0, GetSkillsMenuCurrentValue(skillsMenu));
-		SkillsMenuClose()();
-	}
-
-	static bool __stdcall HandleClassSkillPickerAccept(void* skillsMenu, UInt32 buttonId, Tile* tile)
-	{
-		if (!IsClassSkillPicker(skillsMenu) || !IsClassSkillPickerAcceptEvent(skillsMenu, buttonId))
-			return false;
-
-		void* classMenu = GetSkillsMenuClassMenu(skillsMenu);
-		UInt32 nativeActorValues[kNativeClassMajorCount] = {};
-		UInt32 nativeCount = 0;
-		bool sidecarSelected[kSkillCount] = {};
-		UInt32 foreignSyntheticSelectedCount = 0;
-		UInt32 selectedSyntheticSkillIds[kNativeClassMajorCount] = {};
-		UInt32 selectedSyntheticSkillCount = 0;
-		CollectSelectedClassPickerRows(skillsMenu, nativeActorValues, nativeCount, sidecarSelected,
-			foreignSyntheticSelectedCount, selectedSyntheticSkillIds, selectedSyntheticSkillCount);
-		g_stagedClassMenu = classMenu;
-		std::memcpy(g_stagedSelections, sidecarSelected, sizeof(g_stagedSelections));
-		g_stagedForeignSyntheticSelectionCount = foreignSyntheticSelectedCount;
-		std::memcpy(g_stagedSelectedSyntheticSkillIds, selectedSyntheticSkillIds,
-			sizeof(g_stagedSelectedSyntheticSkillIds));
-		g_stagedSelectedSyntheticSkillCount = selectedSyntheticSkillCount;
-		g_stagedUsed = classMenu != nullptr;
-
-		if (g_skillsMenuAcceptChainedExisting && g_skillsMenuAcceptOriginal)
-		{
-			SkillsMenuAcceptOriginal()(skillsMenu, buttonId, tile);
-			FillNativeClassMajorArray(classMenu, nativeActorValues, nativeCount);
-			return true;
-		}
-
-		FillNativeClassMajorArray(classMenu, nativeActorValues, nativeCount);
-		AdvanceClassMenuAfterSkillPicker(classMenu, skillsMenu, buttonId);
-		return true;
-	}
-
-	static __declspec(naked) void HookSkillsMenuAccept()
-	{
-		__asm
-		{
-			pushad
-			mov eax, [esp + 40]
-			push eax
-			mov eax, [esp + 40]
-			push eax
-			push ecx
-			call HandleClassSkillPickerAccept
-			test al, al
-			popad
-			jnz handled
-			jmp dword ptr[g_skillsMenuAcceptOriginal]
-			handled:
-			ret 8
-		}
-	}
-
-	static void ApplyClassMenuHiddenBladeDisplay(Tile* tile)
-	{
-	}
-
-	static bool TryGetStagedSyntheticDisplaySlot(void* classMenu, UInt32 skillId, UInt32& slot)
-	{
-		slot = 0;
-		if (g_stagedUsed && g_stagedClassMenu == classMenu && g_stagedSelectedSyntheticSkillCount != 0)
-		{
-			const UInt32 displayCount =
-				g_stagedSelectedSyntheticSkillCount > kNativeClassMajorCount ?
-				kNativeClassMajorCount :
-				g_stagedSelectedSyntheticSkillCount;
-			const UInt32 firstDisplayedIndex = g_stagedSelectedSyntheticSkillCount - displayCount;
-			const UInt32 firstSlot = kNativeClassMajorCount - displayCount;
-			for (UInt32 i = firstDisplayedIndex; i < g_stagedSelectedSyntheticSkillCount; ++i)
-			{
-				if (g_stagedSelectedSyntheticSkillIds[i] == skillId)
-				{
-					slot = firstSlot + (i - firstDisplayedIndex);
-					return true;
-				}
-			}
-		}
-
-		if (skillId == kSkills[kSpearSkillIndex].skillId)
-		{
-			slot = 6;
-			return true;
-		}
-
-		return false;
-	}
-
-	static void ApplyClassMenuSidecarDisplay(void* classMenu, void* displayedClass)
-	{
-		Tile* tile = GetClassMenuTile(classMenu);
-		if (!tile)
-			return;
-
-		ApplyClassMenuHiddenBladeDisplay(tile);
-
-		if (!displayedClass)
-			displayedClass = GetClassMenuSelectedClass(classMenu);
-		if (GetClassMenuCustomClass(classMenu) && displayedClass != GetClassMenuCustomClass(classMenu))
-			return;
-
-		UInt32 selected[kSkillCount] = {};
-		UInt32 selectedCount = 0;
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			if (GetStagedOrSavedSelection(classMenu, i) && !SidecarDisplayedByLegacyNativeSlot(classMenu, i))
-				selected[selectedCount++] = i;
-		}
-		const UInt32 displayCount = selectedCount > kNativeClassMajorCount ? kNativeClassMajorCount : selectedCount;
-		const UInt32 stagedForeignCount =
-			g_stagedUsed && g_stagedClassMenu == classMenu ?
-			g_stagedForeignSyntheticSelectionCount :
-			0;
-		const UInt32 foreignDisplayCount =
-			stagedForeignCount > kNativeClassMajorCount - displayCount ?
-			kNativeClassMajorCount - displayCount :
-			stagedForeignCount;
-		const UInt32 firstSlot = kNativeClassMajorCount - foreignDisplayCount - displayCount;
-		for (UInt32 i = 0; i < displayCount; ++i)
-		{
-			const UInt32 index = selected[selectedCount - displayCount + i];
-			UInt32 slot = firstSlot + i;
-			TryGetStagedSyntheticDisplaySlot(classMenu, kSkills[index].skillId, slot);
-			SetTileString(tile, kTileValue_user1 + slot, kSkills[index].name);
-			SetTileFloat(tile, kTileValue_user11 + slot, static_cast<float>(kSkills[index].fallbackActorValue));
-		}
-	}
-
-	static void CommitStagedMajors(void* classMenu)
-	{
-		if (!g_stagedUsed || g_stagedClassMenu != classMenu)
-			return;
-
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-		{
-			if (g_state.states[i].major != (g_stagedSelections[i] ? 1 : 0))
-				g_statsOrderingDirty = true;
-			g_state.states[i].major = g_stagedSelections[i] ? 1 : 0;
-			NormalizeState(i);
-		}
-	}
-
-	static void __fastcall HookClassMenuCommit(void* classMenu, void*)
-	{
-		ClassMenuCommitOriginal()(classMenu);
-		CommitStagedMajors(classMenu);
-		ApplyClassMenuSidecarDisplay(classMenu, GetClassMenuCustomClass(classMenu));
-	}
-
-	static void __fastcall HookClassMenuRefreshDetails(void* classMenu, void*, void* displayedClass)
-	{
-		ClassMenuRefreshDetailsOriginal()(classMenu, displayedClass);
-		ApplyClassMenuSidecarDisplay(classMenu, displayedClass);
 	}
 
 	static bool BytesEqual(UInt32 address, const UInt8* expected, UInt32 length)
@@ -4303,54 +1913,6 @@ namespace SpearSkill
 		return WriteRelJumpChecked(name, address, expected, expectedLength, target, patchLength);
 	}
 
-	static bool InstallStatsMenuMasteryCountsHook()
-	{
-		const UInt32 hookTarget = reinterpret_cast<UInt32>(&HookStatsMenuMasteryCounts);
-		const UInt8* actual = reinterpret_cast<const UInt8*>(kStatsMenuMasteryCountsPatch);
-		if (actual[0] == 0xE9)
-		{
-			const UInt32 currentTarget = ReadRelJumpTarget(kStatsMenuMasteryCountsPatch);
-			if (currentTarget == hookTarget)
-				return true;
-
-			_MESSAGE("SpearSkill: preserving existing StatsMenu mastery count hook target=%08X for sidecar compatibility", currentTarget);
-			return true;
-		}
-
-		return WriteRelJumpChecked("StatsMenu mastery count hook",
-			kStatsMenuMasteryCountsPatch,
-			kStatsMenuMasteryCountsExpected,
-			sizeof(kStatsMenuMasteryCountsExpected),
-			hookTarget,
-			kStatsMenuMasteryCountsPatchLength);
-	}
-
-	static bool InstallActorValueGetNameHook()
-	{
-		const UInt32 hookTarget = reinterpret_cast<UInt32>(&HookActorValueGetName);
-		const UInt8* actual = reinterpret_cast<const UInt8*>(kActorValueGetName);
-		if (actual[0] == 0xE9)
-		{
-			const UInt32 currentTarget = ReadRelJumpTarget(kActorValueGetName);
-			if (currentTarget == hookTarget)
-				return true;
-
-			g_actorValueGetNameOriginal = reinterpret_cast<void*>(currentTarget);
-			_MESSAGE("SpearSkill: chaining existing ActorValue_GetName hook target=%08X", currentTarget);
-			return WriteRelJumpRaw("ActorValue_GetName sidecar display mask chained", kActorValueGetName, hookTarget);
-		}
-
-		if (!g_actorValueGetNameOriginal)
-			g_actorValueGetNameOriginal = CreateTrampoline(kActorValueGetName, kActorValueGetNamePatchLength);
-		if (!g_actorValueGetNameOriginal)
-		{
-			++g_failedPatches;
-			return false;
-		}
-
-		return WriteRelJumpChecked("ActorValue_GetName sidecar display mask", kActorValueGetName, kActorValueGetNameExpected, sizeof(kActorValueGetNameExpected), hookTarget, kActorValueGetNamePatchLength);
-	}
-
 	static bool InstallHooks()
 	{
 		g_appliedPatches = 0;
@@ -4391,28 +1953,6 @@ namespace SpearSkill
 			kEquippableWeaponRatingSelectorPatchLength,
 			g_equippableWeaponRatingSelectorOriginal);
 
-		ok &= WriteRelCallChained("Dialogue Training service Spear sidecar visibility hook",
-			kDialogueTrainingServiceOffersCall,
-			kTESAIFormOffersService,
-			reinterpret_cast<UInt32>(&HookDialogueTrainingOffersService),
-			g_dialogueTrainingOffersServiceOriginalTarget);
-
-		ok &= InstallFunctionJumpHook("TrainingMenu Spear sidecar display hook",
-			kTrainingMenuOpenJump,
-			kTrainingMenuOpenJumpExpected,
-			sizeof(kTrainingMenuOpenJumpExpected),
-			reinterpret_cast<UInt32>(&HookTrainingMenuOpen),
-			sizeof(kTrainingMenuOpenJumpExpected),
-			g_trainingMenuOpenOriginal);
-
-		ok &= InstallFunctionJumpHook("TrainingMenu Spear sidecar purchase hook",
-			kTrainingMenuButton,
-			kTrainingMenuButtonExpected,
-			sizeof(kTrainingMenuButtonExpected),
-			reinterpret_cast<UInt32>(&HookTrainingMenuButton),
-			kTrainingMenuButtonPatchLength,
-			g_trainingMenuButtonOriginal);
-
 		ok &= WriteRelJumpChecked("CombatController weapon skill sidecar scoring",
 			kCombatControllerWeaponSkillCall,
 			kCombatControllerWeaponSkillExpected,
@@ -4438,47 +1978,6 @@ namespace SpearSkill
 		ok &= WriteRelCallChained("MagicPopupMenu enchanted weapon Type sidecar label hook", kMagicPopupEnchantedWeaponLabelSetStringCall, kTileSetString, reinterpret_cast<UInt32>(&HookMagicPopupWeaponTypeLabelSetStringFromEbp), g_magicPopupEbpLabelOriginalTarget);
 		ok &= WriteRelCallChained("MagicPopupMenu enchanted weapon Type sidecar null-label hook", kMagicPopupEnchantedWeaponNullLabelSetStringCall, kTileSetString, reinterpret_cast<UInt32>(&HookMagicPopupWeaponTypeLabelSetStringFromEbp), g_magicPopupEbpLabelOriginalTarget);
 		ok &= WriteRelCallChained("MagicPopupMenu weapon Type sidecar label hook", kMagicPopupSimpleWeaponLabelSetStringCall, kTileSetString, reinterpret_cast<UInt32>(&HookMagicPopupWeaponTypeLabelSetStringFromEdi), g_magicPopupEdiLabelOriginalTarget);
-
-		ok &= InstallFunctionJumpHook("StatsMenu detail pane hook",
-			kStatsMenuDetails,
-			kStatsMenuDetailsExpected,
-			sizeof(kStatsMenuDetailsExpected),
-			reinterpret_cast<UInt32>(&HookStatsMenuDetails),
-			kStatsMenuDetailsPatchLength,
-			g_statsMenuDetailsOriginal);
-		ok &= WriteRelCallChained("StatsMenu skill row creation hook", kStatsMenuCreateRowsCall, kStatsMenuCreateRows, reinterpret_cast<UInt32>(&HookStatsMenuCreateRows), g_statsMenuCreateRowsOriginalTarget);
-		for (UInt32 i = 0; i < sizeof(kStatsMenuRefreshCalls) / sizeof(kStatsMenuRefreshCalls[0]); ++i)
-			ok &= WriteRelCallChained("StatsMenu refresh hook", kStatsMenuRefreshCalls[i], kStatsMenuRefresh, reinterpret_cast<UInt32>(&HookStatsMenuRefresh), g_statsMenuRefreshOriginalTarget);
-		ok &= InstallStatsMenuMasteryCountsHook();
-
-		ok &= InstallFunctionJumpHook("SkillsMenu accept-button hook",
-			kSkillsMenuUpdateAccept,
-			kSkillsMenuUpdateAcceptExpected,
-			sizeof(kSkillsMenuUpdateAcceptExpected),
-			reinterpret_cast<UInt32>(&HookSkillsMenuUpdateAccept),
-			kSkillsMenuUpdateAcceptPatchLength,
-			g_skillsMenuUpdateAcceptOriginal);
-		ok &= InstallFunctionJumpHook("SkillsMenu detail hook",
-			kSkillsMenuDetails,
-			kSkillsMenuDetailsExpected,
-			sizeof(kSkillsMenuDetailsExpected),
-			reinterpret_cast<UInt32>(&HookSkillsMenuDetails),
-			kSkillsMenuDetailsPatchLength,
-			g_skillsMenuDetailsOriginal);
-		g_skillsMenuAcceptChainedExisting =
-			*reinterpret_cast<const UInt8*>(kSkillsMenuAccept) == 0xE9 &&
-			ReadRelJumpTarget(kSkillsMenuAccept) != reinterpret_cast<UInt32>(&HookSkillsMenuAccept);
-		ok &= InstallFunctionJumpHook("SkillsMenu class-skill writeback hook",
-			kSkillsMenuAccept,
-			kSkillsMenuAcceptExpected,
-			sizeof(kSkillsMenuAcceptExpected),
-			reinterpret_cast<UInt32>(&HookSkillsMenuAccept),
-			kSkillsMenuAcceptPatchLength,
-			g_skillsMenuAcceptOriginal);
-		ok &= WriteRelCallChained("SkillsMenu class-skill row injection hook", kSkillsMenuPreselectCall, kSkillsMenuPreselect, reinterpret_cast<UInt32>(&HookSkillsMenuPreselect), g_skillsMenuPreselectOriginalTarget);
-		ok &= WriteRelCallChained("ClassMenu custom-class sidecar commit hook", kClassMenuCommitCall, kClassMenuCommit, reinterpret_cast<UInt32>(&HookClassMenuCommit), g_classMenuCommitOriginalTarget);
-		for (UInt32 i = 0; i < sizeof(kClassMenuRefreshDetailsCalls) / sizeof(kClassMenuRefreshDetailsCalls[0]); ++i)
-			ok &= WriteRelCallChained("ClassMenu class-detail display hook", kClassMenuRefreshDetailsCalls[i], kClassMenuRefreshDetails, reinterpret_cast<UInt32>(&HookClassMenuRefreshDetails), g_classMenuRefreshDetailsOriginalTarget);
 
 		_MESSAGE("SpearSkill: native hooks installed applied=%u failed=%u", g_appliedPatches, g_failedPatches);
 		return ok && g_failedPatches == 0;
@@ -4507,37 +2006,13 @@ namespace SpearSkill
 	{
 	}
 
-	static void SeedSkillFromNative(UInt32 index, UInt32 actorValue)
+	static UInt32 GetSpearSkill()
 	{
-		PlayerCharacter* player = GetPlayer();
-		if (!player)
-			return;
-
-		SkillState& state = g_state.states[index];
-		if (state.level != 5 || state.progress != 0.0f || state.levelUps != 0)
-			return;
-
-		state.level = player->GetBaseActorValue(actorValue);
-		NormalizeState(index);
+		if (!g_tcs || !g_tcs->GetSkillLevel)
+			return 5;
+		return g_tcs->GetSkillLevel(SpearSkillShared::kSpearSkillName);
 	}
 
-	static void SeedDefaultsFromPlayer()
-	{
-		SeedSkillFromNative(kSpearSkillIndex, kActorVal_Blade);
-	}
-
-	// Both SetSpearSkillClamped and ModSpearSkill now route through TCS's
-	// own SetSkillLevel, which already mirrors NotifyLevelIncrease/
-	// ContributeMajorSkillAdvances/ContributeAttributeBonusBucket
-	// internally on the TCS side -- this mod's own equivalent calls
-	// (MirrorLevelUpSideEffects/NotifyLevelIncrease) are deliberately NOT
-	// called here anymore, since doing so would double up on both the
-	// level-up popup and the character's own major-skill-advance credit.
-	// RefreshSidecarSkillDisplay is also gone -- part of the UI machinery
-	// slated for deletion, and would only be touching stale data now
-	// regardless. RefreshPlayerWeaponSidecarPowerAttackGroups is kept: it
-	// reads mastery-dependent animation state, unrelated to the deleted
-	// UI display.
 	static void SetSpearSkillClamped(SInt64 level)
 	{
 		if (!g_tcs || !g_tcs->SetSkillLevel || !g_tcs->GetSkillLevel)
@@ -4603,11 +2078,6 @@ namespace SpearSkill
 		return g_tcs->GetSkillGoverningAttributeIncreases(SpearSkillShared::kSpearSkillName);
 	}
 
-	// Now backed by TCS's own GetSkillMastery, which wraps the SAME
-	// vanilla engine function (0x0056A300) this mod's own
-	// CalcMasteryFromSkill() presumably also wraps -- no threshold-drift
-	// risk either way, but routing through TCS keeps this reading live
-	// data instead of this mod's own now-stale g_state.states[].
 	static UInt32 GetSpearMastery()
 	{
 		if (!g_tcs || !g_tcs->GetSkillMastery)
@@ -4719,18 +2189,14 @@ namespace SpearSkill
 
 	static void SaveCallback(void*)
 	{
-		if (!g_serialization || !g_serialization->WriteRecord(kRecordState, kSaveVersion, &g_state, sizeof(g_state)))
-			_WARNING("SpearSkill: failed to write sidecar save record");
 		if (!SaveWeaponTypeSidecars())
 			_WARNING("SpearSkill: failed to write weapon Type sidecar save record");
 	}
 
 	static void LoadCallback(void*)
 	{
-		ResetState();
 		ClearPendingWeaponSkillConsumer();
 		ClearWeaponRatingNpcContext();
-		ClearTrainingPolicyState();
 		g_weaponTypeStore.Clear();
 		EnsureNpcSpearStoreConfigured();
 		g_npcSkillStore.Clear();
@@ -4743,18 +2209,7 @@ namespace SpearSkill
 		UInt32 length = 0;
 		while (g_serialization->GetNextRecordInfo(&type, &version, &length))
 		{
-			if (type == kRecordState)
-			{
-				if (version != kSaveVersion || length < sizeof(g_state))
-				{
-					_WARNING("SpearSkill: ignored incompatible save record version=%u length=%u", version, length);
-					continue;
-				}
-				SaveState loaded = {};
-				if (g_serialization->ReadRecordData(&loaded, sizeof(loaded)) == sizeof(loaded))
-					g_state = loaded;
-			}
-			else if (type == kRecordWeaponTypes)
+			if (type == kRecordWeaponTypes)
 			{
 				LoadWeaponTypeSidecars(version, length);
 			}
@@ -4764,29 +2219,21 @@ namespace SpearSkill
 			}
 		}
 
-		for (UInt32 i = 0; i < kSkillCount; ++i)
-			NormalizeState(i);
 		LoadEditorWeaponTypeSidecars(true);
 		LoadEditorNpcSpearSidecars(true);
-		LoadEditorNpcSpearTrainingSidecars(true);
-		SeedDefaultsFromPlayer();
 		PatchVisibleGameSettingLabels();
 	}
 
 	static void NewGameCallback(void*)
 	{
-		ResetState();
 		ClearPendingWeaponSkillConsumer();
 		ClearWeaponRatingNpcContext();
-		ClearTrainingPolicyState();
 		g_weaponTypeStore.Clear();
 		EnsureNpcSpearStoreConfigured();
 		g_npcSkillStore.Clear();
 		g_npcTrainingStore.Clear();
 		LoadEditorWeaponTypeSidecars(false);
 		LoadEditorNpcSpearSidecars(false);
-		LoadEditorNpcSpearTrainingSidecars(false);
-		SeedDefaultsFromPlayer();
 		PatchVisibleGameSettingLabels();
 	}
 
@@ -4821,11 +2268,8 @@ namespace SpearSkill
 		case OBSEMessagingInterface::kMessage_PostLoadGame:
 			ClearPendingWeaponSkillConsumer();
 			ClearWeaponRatingNpcContext();
-			ClearTrainingPolicyState();
 			LoadEditorWeaponTypeSidecars(true);
 			LoadEditorNpcSpearSidecars(true);
-			LoadEditorNpcSpearTrainingSidecars(true);
-			SeedDefaultsFromPlayer();
 			PatchVisibleGameSettingLabels();
 			break;
 		}
@@ -4842,14 +2286,6 @@ namespace SpearSkill
 			g_messaging->RegisterListener(g_pluginHandle, "OBSE", MessageHandler);
 	}
 
-	// Temporary debug commands -- added specifically because neither the
-	// (now-removed) SidecarSkillCommands export nor a CSE-authored
-	// trainer NPC are available for testing the TCS migration end to
-	// end. SpearSetLevel exercises SetSpearSkillClamped -> TCS's
-	// SetSkillLevel directly; SpearGetInfo surfaces every TCS-backed
-	// read-only value at once, since none of them have any other
-	// in-game-visible surface yet (Spear's own StatsMenu row still shows
-	// stale data until that UI machinery is deleted).
 	bool Cmd_SpearSetLevel_Execute(COMMAND_ARGS)
 	{
 		UInt32 level = 0;
@@ -4930,7 +2366,6 @@ extern "C"
 			return false;
 
 		g_pluginHandle = obse->GetPluginHandle();
-		SpearSkill::ResetState();
 		SpearSkill::RegisterSerializationCallbacks();
 		SpearSkill::RegisterMessaging(obse);
 
