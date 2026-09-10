@@ -1434,13 +1434,9 @@ namespace SpearSkill
 		{
 			TESObjectWEAP* equipped = GetPlayerEquippedWeapon();
 			const SpearSkillShared::WeaponSkillKind kind = ClassifySidecarWeapon(equipped);
-			_MESSAGE("SpearSkill: HookPlayerModExperience actorValue=%08X useType=%u baseDelta=%.4f equippedWeapon=%p classifiedKind=%d",
-				actorValue, useType, baseDelta, (void*)equipped, static_cast<int>(kind));
-
+			
 			const bool conditionAllows = SkillConditionAllowsProgress(kind, actorValue, useType);
-			if (!conditionAllows)
-				_MESSAGE("SpearSkill: HookPlayerModExperience SkillConditionAllowsProgress=false (kind=%d, actorValue=%08X, useType=%u) -- falling through to original Player_ModExperience", static_cast<int>(kind), actorValue, useType);
-
+	
 			if (conditionAllows && AddWeaponProgress(kind, useType, baseDelta))
 				return;
 		}
