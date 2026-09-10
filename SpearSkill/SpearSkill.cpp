@@ -348,6 +348,8 @@ namespace SpearSkill
 	static UInt32 g_dialogueTrainingOffersServiceOriginalTarget = kTESAIFormOffersService;
 	static UInt32 g_magicPopupEbpLabelOriginalTarget = kTileSetString;
 	static UInt32 g_magicPopupEdiLabelOriginalTarget = kTileSetString;
+	static UInt32 g_combatControllerWeaponSkillChainTarget = 0;
+	static UInt32 g_combatSelectionHandToHandChainTarget = 0;
 	static bool g_hooksInstalled = false;
 	static bool g_hookInstallAttempted = false;
 
@@ -784,8 +786,6 @@ namespace SpearSkill
 		if (!npc)
 			return false;
 
-		// NPC Spear state is keyed by base TESNPC form. That is safe for
-		// authored/base item-rating lookups, but not for live progression.
 		EnsureNpcSpearStoreConfigured();
 		SpearSkillShared::NpcSpearEntry entry = {};
 		if (!g_npcSkillStore.TryGet(npc->refID, &entry))
@@ -1147,23 +1147,30 @@ namespace SpearSkill
 		return actor->GetActorValue(actorValue);
 	}
 
-	static UInt32 __cdecl GetCombatScoringWeaponSkillLevel(Actor* actor, TESObjectWEAP* weapon)
+	static constexpr UInt32 kNotOurWeaponSkill = 0xFFFFFFFF;
+
+	static UInt32 __cdecl TryGetOwnCombatScoringWeaponSkillLevel(Actor* actor, TESObjectWEAP* weapon)
 	{
 		const UInt32 nativeActorValue = NativeWeaponSkillAV(weapon);
 		UInt32 sidecarLevel = 0;
 		if (TryGetPlayerWeaponSidecarLevelForWeapon(actor, weapon, nativeActorValue, &sidecarLevel))
 			return sidecarLevel;
 
-		return GetCurrentActorValue(actor, nativeActorValue);
+		return kNotOurWeaponSkill;
 	}
 
-	static UInt32 __cdecl GetCombatSelectionActorValueSkill(Actor* actor, UInt32 actorValue)
+	static UInt32 __cdecl GetNativeCombatScoringWeaponSkillLevel(Actor* actor, TESObjectWEAP* weapon)
+	{
+		return GetCurrentActorValue(actor, NativeWeaponSkillAV(weapon));
+	}
+
+	static UInt32 __cdecl TryGetOwnCombatSelectionActorValueSkill(Actor* actor, UInt32 actorValue)
 	{
 		UInt32 sidecarLevel = 0;
 		if (TryGetPlayerWeaponSidecarLevel(actor, actorValue, nullptr, &sidecarLevel))
 			return sidecarLevel;
 
-		return GetCurrentActorValue(actor, actorValue);
+		return kNotOurWeaponSkill;
 	}
 
 	static __declspec(naked) void HookCombatControllerWeaponSkillLevel()
@@ -1171,11 +1178,29 @@ namespace SpearSkill
 		__asm
 		{
 			push ecx
+			push ecx
 			push ebx
-			call GetCombatScoringWeaponSkillLevel
+			call TryGetOwnCombatScoringWeaponSkillLevel
 			add esp, 8
+			cmp eax, 0FFFFFFFFh
+			je notMine
+			add esp, 4
 			mov edx, kCombatControllerWeaponSkillContinue
 			jmp edx
+			notMine :
+			mov edx, dword ptr[g_combatControllerWeaponSkillChainTarget]
+				test edx, edx
+				jz noChain
+				pop ecx
+				jmp edx
+				noChain :
+			pop ecx
+				push ecx
+				push ebx
+				call GetNativeCombatScoringWeaponSkillLevel
+				add esp, 8
+				mov edx, kCombatControllerWeaponSkillContinue
+				jmp edx
 		}
 	}
 
@@ -1185,19 +1210,35 @@ namespace SpearSkill
 		{
 			push ebx
 			push esi
-			call GetCombatSelectionActorValueSkill
+			call TryGetOwnCombatSelectionActorValueSkill
 			add esp, 8
+			cmp eax, 0FFFFFFFFh
+			je notMine
 			mov ebx, eax
-			mov edx, [esi]
-			mov eax, [edx + 284h]
-			push 11h
-			mov ecx, esi
-			call eax
-			cmp eax, ebx
-			jle keepCandidate
-			mov edx, kCombatSelectionHandToHandPreferred
+			jmp doCompare
+			notMine :
+			mov edx, dword ptr[g_combatSelectionHandToHandChainTarget]
+				test edx, edx
+				jnz haveChain
+				push ebx
+				push esi
+				call GetCurrentActorValue
+				add esp, 8
+				mov ebx, eax
+				jmp doCompare
+				haveChain :
 			jmp edx
-			keepCandidate :
+				doCompare :
+			mov edx, [esi]
+				mov eax, [edx + 284h]
+				push 11h
+				mov ecx, esi
+				call eax
+				cmp eax, ebx
+				jle keepCandidate
+				mov edx, kCombatSelectionHandToHandPreferred
+				jmp edx
+				keepCandidate :
 			mov edx, kCombatSelectionHandToHandCompareContinue
 				jmp edx
 		}
@@ -1745,7 +1786,24 @@ namespace SpearSkill
 	}
 
 	static bool WriteRelJumpChecked(const char* name, UInt32 address, const UInt8* expected, UInt32 expectedLength, UInt32 target, UInt32 patchLength);
-	static bool WriteRelJumpRaw(const char* name, UInt32 address, UInt32 target, UInt32 patchLength);
+	static bool WriteRelJumpRaw(const char* name, UInt32 address, UInt32 target, UInt32 patchLength = 5);
+
+	static bool WriteRelJumpChainable(const char* name, UInt32 address, const UInt8* expected, UInt32 expectedLength, UInt32 hookTarget, UInt32 patchLength, UInt32& chainTarget)
+	{
+		const UInt8* actual = reinterpret_cast<const UInt8*>(address);
+		if (actual[0] == 0xE9)
+		{
+			const UInt32 currentTarget = ReadRelJumpTarget(address);
+			if (currentTarget == hookTarget)
+				return true;
+
+			chainTarget = currentTarget;
+			_MESSAGE("SpearSkill: chaining existing %s target=%08X", name, currentTarget);
+			return WriteRelJumpRaw(name, address, hookTarget, patchLength);
+		}
+
+		return WriteRelJumpChecked(name, address, expected, expectedLength, hookTarget, patchLength);
+	}
 
 	static bool InstallCalcWeaponDamageHook()
 	{
@@ -1809,7 +1867,7 @@ namespace SpearSkill
 			sizeof(kCalcPowerAttackBonusExpected));
 	}
 
-	static bool WriteRelJumpChecked(const char* name, UInt32 address, const UInt8* expected, UInt32 expectedLength, UInt32 target, UInt32 patchLength = 5)
+	static bool WriteRelJumpChecked(const char* name, UInt32 address, const UInt8* expected, UInt32 expectedLength, UInt32 target, UInt32 patchLength)
 	{
 		const UInt8* actual = reinterpret_cast<const UInt8*>(address);
 		if (actual[0] == 0xE9 && ReadRelJumpTarget(address) == target)
@@ -1841,7 +1899,7 @@ namespace SpearSkill
 		return true;
 	}
 
-	static bool WriteRelJumpRaw(const char* name, UInt32 address, UInt32 target, UInt32 patchLength = 5)
+	static bool WriteRelJumpRaw(const char* name, UInt32 address, UInt32 target, UInt32 patchLength)
 	{
 		if (patchLength < 5)
 		{
@@ -1953,19 +2011,21 @@ namespace SpearSkill
 			kEquippableWeaponRatingSelectorPatchLength,
 			g_equippableWeaponRatingSelectorOriginal);
 
-		ok &= WriteRelJumpChecked("CombatController weapon skill sidecar scoring",
+		ok &= WriteRelJumpChainable("CombatController weapon skill sidecar scoring",
 			kCombatControllerWeaponSkillCall,
 			kCombatControllerWeaponSkillExpected,
 			sizeof(kCombatControllerWeaponSkillExpected),
 			reinterpret_cast<UInt32>(&HookCombatControllerWeaponSkillLevel),
-			sizeof(kCombatControllerWeaponSkillExpected));
+			sizeof(kCombatControllerWeaponSkillExpected),
+			g_combatControllerWeaponSkillChainTarget);
 
-		ok &= WriteRelJumpChecked("Combat selection weapon skill sidecar scoring",
+		ok &= WriteRelJumpChainable("Combat selection weapon skill sidecar scoring",
 			kCombatSelectionHandToHandComparePatch,
 			kCombatSelectionHandToHandCompareExpected,
 			sizeof(kCombatSelectionHandToHandCompareExpected),
 			reinterpret_cast<UInt32>(&HookCombatSelectionHandToHandSkillCompare),
-			sizeof(kCombatSelectionHandToHandCompareExpected));
+			sizeof(kCombatSelectionHandToHandCompareExpected),
+			g_combatSelectionHandToHandChainTarget);
 
 		ok &= InstallCalcWeaponDamageHook();
 		ok &= InstallCalcPowerAttackBonusHook();
