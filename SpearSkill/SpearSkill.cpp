@@ -12,6 +12,7 @@
 #include "SpearNpcSkillSidecar.h"
 #include "SpearWeaponTypeSidecar.h"
 #include "TrueCustomSkills/TrueCustomSkillsInterface.h"
+#include "OBSEKeywords/KeywordAPI.h"
 
 #include <cmath>
 #include <cstdio>
@@ -1080,7 +1081,16 @@ namespace SpearSkill
 		if (TryGetAuthoredWeaponType(weapon, &authoredKind))
 			return authoredKind;
 
-		return SpearSkillShared::ClassifyWeapon(weapon->type, weapon->GetEditorID(), GetWeaponDisplayName(weapon));
+		if (KeywordAPI::HasKeyword(weapon->refID, "Spear"))
+			return SpearSkillShared::kWeaponSkill_Spear;
+
+		SpearSkillShared::WeaponSkillKind weapKind = SpearSkillShared::ClassifyWeapon(weapon->type, weapon->GetEditorID(), GetWeaponDisplayName(weapon));
+
+		if (weapKind == SpearSkillShared::kWeaponSkill_Spear)
+			KeywordAPI::AddKeyword(weapon->refID, "Spear");
+		else
+			g_weaponTypeStore.SetLoaded(weapon->refID, weapKind);
+		return weapKind;
 	}
 
 	static UInt32 GetPlayerWeaponSidecarIndexForActorValueContext(Actor* actor, UInt32 actorValue)
@@ -2303,6 +2313,14 @@ namespace SpearSkill
 		g_serialization->SetNewGameCallback(g_pluginHandle, NewGameCallback);
 	}
 
+	static void UnifiedMessageHandler(OBSEMessagingInterface::Message* message)
+	{
+		if (!message)
+			return;
+
+		KeywordAPI::MessageHandler(message);
+	}
+
 	static void MessageHandler(OBSEMessagingInterface::Message* message)
 	{
 		if (!message)
@@ -2339,58 +2357,11 @@ namespace SpearSkill
 		g_messaging =
 			static_cast<OBSEMessagingInterface*>(obse->QueryInterface(kInterface_Messaging));
 		if (g_messaging && g_messaging->RegisterListener)
+		{
 			g_messaging->RegisterListener(g_pluginHandle, "OBSE", MessageHandler);
+			g_messaging->RegisterListener(g_pluginHandle, nullptr, UnifiedMessageHandler);
+		}
 	}
-
-	bool Cmd_SpearSetLevel_Execute(COMMAND_ARGS)
-	{
-		UInt32 level = 0;
-		*result = 0.0;
-
-		if (!ExtractArgs(PASS_EXTRACT_ARGS, &level))
-			return true;
-
-		SetSpearSkillClamped(static_cast<SInt64>(level));
-		*result = static_cast<double>(GetSpearSkill());
-		Console_Print("Spear level set to %u", GetSpearSkill());
-		_MESSAGE("SpearSkill: SpearSetLevel requested=%u actual=%u", level, GetSpearSkill());
-		return true;
-	}
-
-	DEFINE_COMMAND_PLUGIN(SpearSetLevel,
-		"debug: directly sets the Spear skill level via TCS's SetSkillLevel (temporary, for testing the TCS migration)",
-		0, 1, kParams_OneInt);
-
-	bool Cmd_SpearGetInfo_Execute(COMMAND_ARGS)
-	{
-		*result = static_cast<double>(GetSpearSkill());
-
-		Console_Print("Spear level=%u progress=%.2f/%.2f levelUps=%u governingAttrIncreases=%u mastery=%u major=%s perkMask=%u",
-			GetSpearSkill(),
-			GetSpearProgress(),
-			GetSpearRequiredProgress(),
-			GetSpearLevelUps(),
-			GetSpearGoverningAttributeIncreases(),
-			GetSpearMastery(),
-			IsSpearMajorSkill() ? "true" : "false",
-			GetSpearPerkMask());
-
-		_MESSAGE("SpearSkill: SpearGetInfo level=%u progress=%.2f/%.2f levelUps=%u governingAttrIncreases=%u mastery=%u major=%d perkMask=%u",
-			GetSpearSkill(),
-			GetSpearProgress(),
-			GetSpearRequiredProgress(),
-			GetSpearLevelUps(),
-			GetSpearGoverningAttributeIncreases(),
-			GetSpearMastery(),
-			IsSpearMajorSkill() ? 1 : 0,
-			GetSpearPerkMask());
-		return true;
-	}
-
-	DEFINE_COMMAND_PLUGIN(SpearGetInfo,
-		"debug: prints every TCS-backed Spear skill value at once (temporary, for testing the TCS migration)",
-		0, 0, NULL);
-
 }
 
 extern "C"
@@ -2422,13 +2393,9 @@ extern "C"
 			return false;
 
 		g_pluginHandle = obse->GetPluginHandle();
+		KeywordAPI::Init((OBSEMessagingInterface*)obse->QueryInterface(kInterface_Messaging), g_pluginHandle);
 		SpearSkill::RegisterSerializationCallbacks();
 		SpearSkill::RegisterMessaging(obse);
-
-		if (!obse->RegisterCommand(&SpearSkill::kCommandInfo_SpearSetLevel))
-			_ERROR("SpearSkill: failed to register SpearSetLevel debug command");
-		if (!obse->RegisterCommand(&SpearSkill::kCommandInfo_SpearGetInfo))
-			_ERROR("SpearSkill: failed to register SpearGetInfo debug command");
 
 		return true;
 	}
