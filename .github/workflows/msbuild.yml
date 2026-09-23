@@ -17,6 +17,11 @@ jobs:
         with:
           repository: llde/xOBSE
           ref: master
+          
+      - name: Checkout plugin source
+        uses: actions/checkout@v4
+        with:
+          path: googlepox/TrueCustomSkills
 
       - name: Checkout plugin source
         uses: actions/checkout@v4
