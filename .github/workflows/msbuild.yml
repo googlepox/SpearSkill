@@ -18,7 +18,7 @@ jobs:
           repository: llde/xOBSE
           ref: master
           
-      - name: Checkout plugin source
+      - name: Checkout True Custom Skills
         uses: actions/checkout@v4
         with:
           repository: googlepox/TrueCustomSkills
