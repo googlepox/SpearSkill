@@ -21,7 +21,9 @@ jobs:
       - name: Checkout plugin source
         uses: actions/checkout@v4
         with:
-          path: googlepox/TrueCustomSkills
+          repository: googlepox/TrueCustomSkills
+          ref: master
+          path: TrueCustomSkills
 
       - name: Checkout plugin source
         uses: actions/checkout@v4
